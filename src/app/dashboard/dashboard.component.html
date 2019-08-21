@@ -1,0 +1,322 @@
+<h1 class="heading h3 mb-3">Painel de Demandas</h1>
+
+<div @dashboardAnimation>
+
+  <!-- Gráficos -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div [chart]="stock"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div [chart]="chartPie"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div [chart]="chartBarra"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Gráficos de progresso -->
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header"> Sunac - Porto sem Papel </div>
+        <button type="button" class="btn btn-sm btn-primary randomize-btn" (click)="random()">Randomize</button>
+        <hr>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Aberta</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-aberta"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Cancelada</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="true" [value]="dynamic" type="progressbar-cancelada"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Concluída</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-concluida"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Análise</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-em-analise"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Aprovação</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-em-aprovacao"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Atendimento</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-em-atendimento"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Faturamento</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-em-faturamento"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Homologação</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-em-homologacao"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Implantação</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="true" [value]="dynamic" type="progressbar-em-implantacao"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Suspensa</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-suspensa"></progressbar>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">Equipe Teste Adriana</div>
+        <button type="button" class="btn btn-sm btn-primary randomize-btn" (click)="random()">Randomize</button>
+        <hr>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Aberta</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-aberta"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Cancelada</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="true" [value]="dynamic" type="progressbar-cancelada"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Concluída</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-concluida"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Análise</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-em-analise"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Aprovação</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-em-aprovacao"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Atendimento</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-em-atendimento"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Faturamento</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-em-faturamento"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Homologação</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-em-homologacao"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Em Implantação</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="true" [value]="dynamic" type="progressbar-em-implantacao"></progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-group">
+                <div class="progress-group-header align-items-end">
+                  <div>Suspensa</div>
+                  <div class="ml-auto font-weight-bold mr-2">{{dynamic}}</div>
+                  <div class="text-muted small">({{dynamic+2}}%)</div>
+                </div>
+                <div class="progress-group-bars">
+                  <div class="progress progress-sm">
+                    <progressbar [animate]="true" [striped]="false" [value]="dynamic" type="progressbar-suspensa"></progressbar>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

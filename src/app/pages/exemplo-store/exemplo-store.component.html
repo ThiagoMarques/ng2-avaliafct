@@ -1,0 +1,12 @@
+<!--
+  Exemplo de página usando o ngrx-store
+ -->
+<h1 class="heading h3 mb-3">Exemplo usando o NgRx</h1>
+<div class="card">
+  <div class="card-body">
+    <div class="py-3">Contador: {{ counter | async }}</div>
+    <button class="btn btn-primary" (click)="increment()">Incrementar</button>
+    <button class="btn btn-primary" (click)="decrement()">Decrementar</button>
+    <button class="btn btn-warning" (click)="reset()">Limpar contador</button>
+  </div>
+</div>

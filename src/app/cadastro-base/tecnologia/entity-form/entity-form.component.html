@@ -1,0 +1,80 @@
+<div class="card">
+    <form [formGroup]="formTecnologia" #formDir="ngForm" (ngSubmit)="onCreate()" novalidate>
+      <div class="card-header">
+        <h1 class="heading h3 mb-3">Detalhes da Tecnologia</h1>
+      </div>
+      <div class="card-body">
+        <!-- Tipo -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="tipo" class="label">Tipo</label>
+              <select id="tipo" class="form-control" formControlName="tipo" [ngClass]="{'is-invalid': (form.tipo.invalid && form.tipo.touched) || (form.tipo.invalid && formDir.submitted), 'is-valid': form.tipo.valid}">
+                <option [selected]="true" value="">Selecione</option>
+                <option value="Desenvolvimento">Desenvolvimento</option>
+                <option value="Design">Design</option>
+              </select>
+              <div class="invalid-feedback" *ngIf="(form['tipo'].invalid && form['tipo'].touched || formDir.submitted)">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                O campo Tipo é obrigatório!
+              </div>
+              <div class="valid-feedback">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teste Input -->
+        <app-sd-input 
+        ext_type="text"
+        ext_mask="cnpj"
+        ext_label="Esta é a label"
+        ext_placeholder="Está é a placeholder"
+        ext_class="form-control"
+        ext_required = "false"></app-sd-input>
+
+        <!-- Nome -->
+        <!-- <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="nome" class="required">Nome</label>
+              <input type="text" placeholder="Informe o nome da Tecnologia" name="nome" id="nome" class="form-control" formControlName="nome">
+              <div class="invalid-feedback" *ngIf="(form['nome'].invalid && form['nome'].touched || formDir.submitted)">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                O campo Nome é obrigatório!
+              </div>
+              <div class="valid-feedback">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- Descrição -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="descricao" class="required">Descrição</label>
+              <textarea class="form-control" placeholder="Descreva os detalhes do Peso" formControlName="descricao"
+                name="descricao" id="descricao" cols="30" rows="5" [ngClass]="{'is-invalid': (form.descricao.invalid && form.descricao.touched) || (form.descricao.invalid && formDir.submitted), 'is-valid': form.descricao.valid}"></textarea>
+              <div class="invalid-feedback" *ngIf="(form['descricao'].invalid && form['descricao'].touched) || formDir.submitted">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                O campo Descrição é obrigatório!
+              </div>
+              <div class="valid-feedback">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary" [disabled]="!formTecnologia.valid" type="submit">
+          Salvar
+        </button>
+        <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>

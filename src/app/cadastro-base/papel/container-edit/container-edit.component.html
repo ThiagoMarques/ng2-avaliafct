@@ -1,0 +1,106 @@
+<div class="card">
+  <form [formGroup]="formPapel" #formDir="ngForm" (ngSubmit)="onCreate()" novalidate>
+    <div class="card-header">
+      <h1 class="heading h3 mb-3">Detalhes do Papel dos Colaboradores</h1>
+    </div>
+    <div class="card-body">
+      <!-- Tipo -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="tipo" class="required">Tipo</label>
+            <select id="tipo" class="form-control" formControlName="tipo" [ngClass]="{'is-invalid': (form.tipo.invalid && form.tipo.touched) || (form.tipo.invalid && formDir.submitted), 'is-valid': form.tipo.valid}">
+              <option [selected]="true" value="">Selecione</option>
+                <option value="Desenvolvimento">Desenvolvimento</option>
+                <option value="Design">Design</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['tipo'].invalid && form['tipo'].touched || formDir.submitted)">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Tipo é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Nome -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="nome" class="required">Nome</label>
+            <select id="nome" class="form-control" formControlName="nome" [ngClass]="{'is-invalid': (form.nome.invalid && form.tipo.touched) || (form.nome.invalid && formDir.submitted), 'is-valid': form.nome.valid}">
+              <option [selected]="true" value="">Selecione</option>
+              <option *ngFor="let papeis of papelList" [selected]="papeis.nome === papel.nome"
+              ngValue="{{papeis.nome}}">{{papeis.nome}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['nome'].invalid && form['nome'].touched || formDir.submitted)">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Nome é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Associar Atributo Papel -->
+      <div class="row">
+       <div class="col-sm-12">
+         <div id="box_atributo" class="form-group">
+           <h3 id="titulo_atributo" class="h6 mb-3 box-tools ">Associar Atributos com papel
+             <button id="button_atributo" type="button" class="btn btn-box-tool pull-right" (click)="carregaAtributos(papeis.atributos)">
+               <i class="fa " [ngClass]="{'fa-minus': isOpen === true ,'fa-plus': isOpen === false }"></i>
+             </button></h3>
+           <!-- <div class="card-body" *ngIf="show">
+             <div class="col-sm-12" *ngFor="let items of atrPapel;" [attr.data-index]="i">
+               <div class="checkbox">
+                 <label>
+                   <input type="checkbox" formControlName="ativado"  id="ativado" >{{items.letra }} - {{ items.descricao }}
+                 </label>
+               </div>
+             </div>
+           </div> -->
+           <div class="card-body" *ngIf="show">
+             <div class="col-sm-12" formArrayName="atributo" *ngFor="let items of getPapelList(formPapel); let i = index;" [attr.data-index]="i">
+               <div [formGroupName]="i">
+               <div class="checkbox" >
+                 <label>
+                       <input type="checkbox" formControlName="ativado"  id="ativado" [value]="items.value"/>{{ items.value.letra }} - {{ items.value.descricao }}      
+                 </label>
+               </div>
+               </div>
+             </div>
+           </div>
+
+         </div>
+       </div>
+     </div>
+      <!-- Descrição -->
+      <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="descricao" class="required">Descrição</label>
+              <textarea class="form-control" placeholder="Descreva os detalhes do Papel" formControlName="descricao"
+                name="descricao" id="descricao" cols="30" rows="5" [ngClass]="{'is-invalid': (form.descricao.invalid && form.descricao.touched) || (form.descricao.invalid && formDir.submitted), 'is-valid': form.descricao.valid}"></textarea>
+              <div class="invalid-feedback" *ngIf="(form['descricao'].invalid && form['descricao'].touched) || formDir.submitted">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                O campo Descrição é obrigatório!
+              </div>
+              <div class="valid-feedback">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit">
+        Salvar
+      </button>
+      <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

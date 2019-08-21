@@ -1,0 +1,61 @@
+<!--
+  Exemplo de página de conteúdo
+ -->
+<h1 class="heading h3 mb-3">Conteúdo do Quick Start</h1>
+<div class="card">
+  <div class="card-body">
+    <p class="bd-lead">Conheça o que está disponível no <strong>Quick Start</strong>.</p>
+
+    <h2>Recursos</h2>
+    <ul>
+      <li>Serpro Design:</li>
+      <li>CoreUI</li>
+      <li>NgRx e ngrx-forms</li>
+      <li>Ícones: Font Awesome e CoreUI Icons</li>
+    </ul>
+
+    <h2>Estrutura</h2>
+    <p>Uma vez clonado o projeto você verá algo assim:</p>
+    <figure class="highlight">
+      <pre>
+        <code class="language-plaintext" data-lang="plaintext">
+          Quickstart/
+            └── src/
+                └── app/
+                    ├── app-shell
+                    ├── auth
+                    ├── dashboard
+                    ├── feature
+                    ├── pages
+                    ├── shared
+                    ├── user
+                    ├── _nav.ts
+                    ├── app-routing.module.ts
+                    ├── app.component.ts
+                    └── app.module.ts
+        </code>
+      </pre>
+    </figure>
+
+    <h3>Arquivos</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Arquivos TypeScripts</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Obrigatório</th>
+          <th scope="col">Versão</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of arquivos" >
+          <td class="text-success">{{item.nome}}</td>
+          <td class="text-success">{{item.descricao}}</td>
+          <td class="text-success">{{item.obrigatorio}}</td>
+          <td class="text-success">{{item.versao}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="container mt-5">
+  
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-body text-center">
+          <h1>AvaliaFCT</h1>
+          <form [formGroup]="formLogin" #formDir="ngForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="form-group">
+              <label for="login" class="sr-only">Digite seu CPF</label>
+              <!-- <input type="text"  name="login" formControlName="login" class="form-control" id="login" placeholder="Digite seu CPF" maxlength="14" 
+              [ngClass]="{'is-invalid': (form.login.invalid && form.login.touched) || (form.login.invalid && formDir.submitted), 'is-valid': form.login.valid}"> -->
+              <input  mask="000.000.000-00" type="text"  name="login" formControlName="login" class="form-control" id="login" placeholder="Digite seu CPF" maxlength="14" 
+              [ngClass]="{'is-invalid': (form.login.invalid && form.login.touched) || (form.login.invalid && formDir.submitted), 'is-valid': form.login.valid}">
+              <div class="invalid-feedback" *ngIf="(form['login'].invalid && form['login'].touched || formDir.submitted)">
+                  <i class="fa fa-info-circle" aria-hidden="true"></i>
+                  Insira o CPF
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="senha" class="sr-only">Digite sua Senha</label>
+              <input type="password" name="senha" formControlName="senha" class="form-control" id="senha" placeholder="Digite sua Senha" maxlength="25"
+              [ngClass]="{'is-invalid': (form.senha.invalid && form.senha.touched) || (form.senha.invalid && formDir.submitted), 'is-valid': form.senha.valid}">
+              <div class="invalid-feedback" *ngIf="(form['senha'].invalid && form['senha'].touched || formDir.submitted)">
+                  <i class="fa fa-info-circle" aria-hidden="true"></i>
+                  Insira a senha
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">
+                Entrar
+              </button>
+            </div>
+          </form>
+          <p>
+            <a href="#" (click)="openModalEsqueceuSenha(template)">Esqueceu sua senha?</a>
+            <!-- <br> Ainda não tem uma conta? -->
+            <!-- <a routerLink="/criar-uma-conta">Cadastre-se agora</a>. -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Por favor informe seu email</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- <p>Informe seu e-mail. Uma nova senha será gerada e enviada para ele.</p> -->
+      <div class="form-group has-feedback">
+        <form [formGroup]="recuperarSenhaForm" *ngIf="!senhaNova" >
+          <div class="form-group"  [ngClass]="{'has-error': (!recuperarSenhaForm.controls['email'].valid && recuperarSenhaForm.controls['email'].touched) && recuperarSenhaForm.controls.email.errors?.required || (!recuperarSenhaForm.controls['email'].valid && recuperarSenhaForm.controls['email'].touched) && recuperarSenhaForm.controls.email.errors?.email }">
+              <input type="text" class="form-control" placeholder="Ex: fulano@email.com" size="25" formControlName="email">
+              <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+              <span class="text-center" *ngIf="(!recuperarSenhaForm.controls['email'].valid && recuperarSenhaForm.controls['email'].touched) && recuperarSenhaForm.controls['email'].touched && recuperarSenhaForm.controls.email.errors?.required" class="help-block">O campo Email é obrigatório.</span>
+              <span class="text-center" *ngIf="(!recuperarSenhaForm.controls['email'].valid && recuperarSenhaForm.controls['email'].touched) && recuperarSenhaForm.controls.email.errors?.email" class="help-block">O campo Email inválido.</span>
+          </div>
+          <div class="form-group">
+              <button type="button" class="btn btn-default" (click)="resetarSenha()" [disabled]="recuperarSenhaForm.invalid">Confirmar</button>
+              <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Voltar</button>
+          </div>
+        </form>
+        <div *ngIf="senhaNova" >
+          <p style="font-size: 14px;">{{ results.texto }} <b><span style="font-size: 18px;">{{ results.senha }}</span></b> </p>  
+          <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>

@@ -1,0 +1,34 @@
+variables:
+  GIT_SSL_NO_VERIFY: "true"
+  VERSION: $CI_COMMIT_TAG
+
+stages:
+  - test
+
+test:
+  image: node:9
+  stage: test
+  before_script:
+    - npm set strict-ssl false
+    - npm config set registry http://nexus.aic.serpro/repository/npm-group/
+    - npm config set @serpro:registry http://nexus.aic.serpro/repository/npm-private/
+    - npm config set @serpro-design:registry http://nexus.aic.serpro/repository/npm-private/
+    # - npm config set registry=https://registry.npmjs.com/
+  script:
+    - df -h
+
+    # Install packages
+    # - time npm install
+    #- time npm rebuild node-sass
+
+    # Instalando o chromeHeadlessCI
+    # - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
+    # - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+    # - apt-key update
+    # - apt-get update
+    # - apt-get install --allow-unauthenticated google-chrome-stable xvfb
+    
+    # Iniciando os testes
+    # - time npm run ci:test
+    
+  

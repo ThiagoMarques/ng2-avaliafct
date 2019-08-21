@@ -1,0 +1,58 @@
+<div class="card">
+  <form [formGroup]="formAlterarSenha" #formDir="ngForm" (ngSubmit)="resetPassword()" novalidate>
+    <div class="card-header">
+      <h1 class="heading h3 mb-3">Alterar Senha </h1>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <label for="tipo">CPF</label>
+          <input type="text" class="form-control" formControlName="cpf" id="cpf">
+
+          <label for="tipo" class="required">Senha atual</label>
+          <input type="password" class="form-control" formControlName="senha_atual" id="senha_atual" required maxlength="25"
+            [ngClass]="{'is-invalid': (form.senha_atual.invalid && form.senha_atual.touched ) || (form.senha_atual.invalid && formDir.submitted), 'is-valid': form.senha_atual.valid}">
+          <div class="invalid-feedback"
+            *ngIf="(form['senha_atual'].invalid && form['senha_atual'].touched || formDir.submitted)">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            Insira a Senha Atual corretamente
+          </div>
+
+          <label for="tipo" class="required">Nova senha</label>
+          <input type="password" class="form-control" formControlName="nova_senha" id="nova_senha" required maxlength="25"
+            [ngClass]="{'is-invalid': (form.nova_senha.invalid && form.nova_senha.touched) || (form.nova_senha.invalid && formDir.submitted), 'is-valid': form.senha_atual.valid}">
+          <div class="invalid-feedback"
+            *ngIf="(form['nova_senha'].invalid && form['nova_senha'].touched || formDir.submitted)">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            Insira a Nova Senha corretamente
+          </div>
+          <div class="invalid-feedback" *ngIf="form.nova_senha.touched && form.nova_senha.errors">
+            <i aria-hidden="true"></i>
+            A senha deve conter no mínimo 8 caracteres
+          </div>
+          <label for="tipo" class="required">Confirmar nova senha</label>
+          <input type="password" class="form-control" formControlName="confirmar_senha" id="confirmar_senha" required maxlength="25"
+            [ngClass]="{'is-invalid': (form.confirmar_senha.invalid && form.confirmar_senha.touched && form.confirmar_senha.errors) || (form.confirmar_senha.invalid && formDir.submitted) , 'is-valid': form.confirmar_senha.valid}">
+          <div class="invalid-feedback"
+            *ngIf="(form['confirmar_senha'].invalid && form['confirmar_senha'].touched || formDir.submitted)">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            Confirme a Nova Senha corretamente
+          </div>
+          <div class="invalid-feedback"
+            *ngIf="(form.nova_senha.touched && form.confirmar_senha.touched) && (formAlterarSenha.value.nova_senha !== formAlterarSenha.value.confirmar_senha)">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            As senhas não coincidem
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit">
+        Salvar
+      </button>
+      <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

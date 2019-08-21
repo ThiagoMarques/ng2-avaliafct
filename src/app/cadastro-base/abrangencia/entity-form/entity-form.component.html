@@ -1,0 +1,125 @@
+<div class="card">
+  <form [formGroup]="formAbrangencia" #formDir="ngForm" (ngSubmit)="onCreate()" novalidate>
+    <div class="card-header">
+      <h1 class="heading h3 mb-3">Detalhes da Abrangência de Conhecimento </h1>
+    </div>
+    <div class="card-body">
+      <!-- Tipo -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="tipo" class="required">Tipo</label>
+            <select name="tipo" class="form-control" formControlName="tipo" id="tipo" [ngClass]="{'is-invalid': (form.tipo.invalid && form.tipo.touched) || (form.tipo.invalid && formDir.submitted), 'is-valid': form.tipo.valid}">
+              <option [selected]="true" value="">Selecione</option>
+                <option value="Desenvolvimento">Desenvolvimento</option>
+                <option value="Design">Design</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['tipo'].invalid && form['tipo'].touched || formDir.submitted)">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Tipo é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Atributo -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="atributo" class=required>Atributo</label>
+            <select class="form-control" name="atributo" formControlName="atributo" id="atributo" [ngClass]="{'is-invalid': (form.atributo.invalid && form.atributo.touched) || (form.atributo.invalid && formDir.submitted), 'is-valid': form.atributo.valid}">
+              <option [selected]="true" value="">Selecione</option>
+                <option value="a">a) Analisar as demandas apresentadas pelas áreas de negócio e propor alternativas de
+                  solução técnica e estratégia de desenvolvimento</option>
+                <option value="b">b) Elicitar requisitos e criar modelos de uso e de testes de sistemas</option>
+                <option value="c">c) Elaborar projeto lógico e físico de dados e de sistemas</option>
+                <option value="d">d) Definir a arquitetura de softwares e de sistemas</option>
+                <option value="e">e) Especificar unidades de implementação de software</option>
+                <option value="f">f) Elaborar documentação relativa às etapas de desenvolvimento de sistemas</option>
+                <option value="g">g) Planejar, elaborar e ministrar treinamentos relativos a sistemas de informação,
+                  ferramentas de acesso e manipulação de dados</option>
+                <option value="h">h) Selecionar, implementar e internalizar novas tecnologias de desenvolvimento</option>
+                <option value="i">i) Prestar assessoramento técnico no que se refere a prazos, recursos e alternativas
+                  de desenvolvimento de sistemas</option>
+                <option value="j">j) Especificar a manutenção de softwares e de sistemas</option>
+                <option value="j">k) Manter os sistemas em produção, avaliando seu desempenho e, quando necessário,
+                  propondo medidas de correção dos desvios</option>
+                <option value="l">l) Planejar e administrar componentes reusáveis e repositórios</option>
+                <option value="m">m) Certificar e inspecionar modelos e códigos de sistemas</option>
+                <option value="n">n) Elaborar e gerenciar projetos de sistemas e software</option>
+                <option value="o">o) Identificar e analisar as necessidades dos clientes em relação à informações
+                  visuais relacionadas à mídia digital e/ou impressa</option>
+                <option value="q">q) Elaborar e implementar projetos de programação visual relacionados à mídia digital
+                  e/ou impressa</option>
+                <option value="r">r) Elaborar e implementar leiaute para mídia digital e/ou impressa</option>
+                <option value="s">s) Efetuar manutenção relacionada aos elementos visuais em mídia digital e/ou
+                  impressa</option>
+                <option value="t">t) Efetuar prospecção, análise e implementação de soluções de usabilidade e
+                  acessibilidade</option>
+                <option value="u">u) Definir linguagens, materiais e processos de produção a serem utilizados em mídia
+                  digital e/ou impressa</option>
+                <option value="v">v) Elaborar especificações técnicas e documentações necessárias à execução das
+                  atividades de programação visual</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['atributo'].invalid && form['atributo'].touched || formDir.submitted)">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Atributo é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Classificacao -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="classificacao" class="required">Classificação</label>
+            <select name="" class="form-control" formControlName="classificacao" id="classificacao" [ngClass]="{'is-invalid': (form.classificacao.invalid && form.classificacao.touched) || (form.classificacao.invalid && formDir.submitted), 'is-valid': form.classificacao.valid}">
+              <option [selected]="true" value="">Selecione</option>
+                <option value="1">1-Moderado</option>
+                <option value="2">2-Significativa</option>
+                <option value="3">3-Muito</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['classificacao'].invalid && form['classificacao'].touched || formDir.submitted)">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Classificação é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Descrição -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="descricao" class="required">Descrição</label>
+            <textarea class="form-control" placeholder="Descreva os detalhes da Abrangência de Conhecimento"
+              formControlName="descricao" name="descricao" id="descricao" cols="30" rows="5" [ngClass]="{'is-invalid': (form.descricao.invalid && form.descricao.touched) || (form.descricao.invalid && formDir.submitted), 'is-valid': form.descricao.valid}"></textarea>
+            <div class="invalid-feedback" *ngIf="(form['descricao'].invalid && form['descricao'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Descrição é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit">
+          <!-- [disabled]="!formAbrangencia.valid"  -->
+        Salvar
+      </button>
+      <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

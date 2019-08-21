@@ -1,0 +1,23 @@
+<lib-page-shell [navItems]="navItems" [options]="pageShellOptions">
+  <!-- Opcional: slot-top-middle -->
+  <!-- <div slot-top-middle>exemplo</div> -->
+
+  <!-- Opcional: slot-top-right -->
+  <div slot-top-right class="ml-3 mr-3 mr-lg-5 d-md-down-none">
+    <lib-dropdown-user
+      [user]="currentUser"
+      [navItems]="userItems"
+    ></lib-dropdown-user>
+  </div>
+
+  <div slot-main [@fadeAnimation]="getRouterOutletState(o)">
+    <sd-alert-center></sd-alert-center>
+    <router-outlet class="app-shell-router" #o="outlet"></router-outlet>
+  </div>
+
+  <!-- Opcional: slot-status -->
+  <div slot-status><em>Status</em>: OK!</div>
+  <!-- TEste -->
+  <!-- Opcional: slot-version -->
+  <div slot-version>Versão: <em>0.0.0-alfa.1</em></div>
+</lib-page-shell>

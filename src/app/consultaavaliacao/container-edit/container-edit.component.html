@@ -1,0 +1,292 @@
+<div id="print-section">
+
+  <div class="card" *ngFor="let avalia of avaliacao; let i = index;">
+  <div class="card-header">
+    <h1 class="heading h3 mb-3">Avaliação Individual</h1>
+  </div>
+  
+  <!-- Escopo do teste -->
+  <div class="card-body" style="padding-bottom: 0px;">
+    <h6 class="h6 mb-6">Resumo da Avaliação</h6>
+    <div class="row">
+      <div class="col-auto">
+        <div class="form-group">
+          <label class="text-uppercase font-weight-bold">Nome:</label>
+          <span style="font-size: 0.8rem">{{ avalia.avaliacao[0].nome }}</span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label class="text-uppercase font-weight-bold">Matrícula:</label>
+          <span style="font-size: 0.8rem">{{ avalia.avaliacao[0].matricula }}</span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label class="text-uppercase font-weight-bold">Divisão:</label>
+          <span style="font-size: 0.8rem">{{ avalia.avaliacao[0].sigla }}</span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label class="text-uppercase font-weight-bold">Data da Avaliação:</label>
+          <span style="font-size: 0.8rem">{{ avalia.avaliacao[0].dt_avaliacao }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+<!-- Escopo do teste -->
+  <!-- Papeis -->
+  <div class="card-body">
+    <h6 class="h6 mb-6" style="padding-bottom: 20px;">Papeis</h6>
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- <div class="row"> -->
+        <div class="btn btn-primary" style="background-color: #3b5998;
+  border-color: #3b5998;" id="button" *ngFor="let papeis of  avalia.papel; let i = index;">
+          {{ papeis.nome_papel }}
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tecnologia -->
+  <div class="card-body">
+    <h6 class="h6 mb-6" style="padding-bottom: 20px;">Tecnologia</h6>
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="btn btn-primary" id="button" *ngFor="let tec of  avalia.tecnologias; let i = index;">
+          {{ tec.nome_tecnologia }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Atributos -->
+  <div class="card-body">
+    <h6 class="h6 mb-6" style="padding-bottom: 20px;">Atributos</h6>
+    <div class="row">
+      <div class="col" style="padding-left: 30px; padding-bottom: 30px;">
+        <span style="font-weight: bold; font-size: 0.8rem;">Descrição</span>
+      </div>
+      <div class="col-auto" style="margin-right: 25px;">
+        <span class="badge bg-yellow" style="margin: 5px;">Abrangência</span>
+        <span class="badge bg-light-blue" style="margin: 5px;">Complexidade</span>
+        <span class="badge bg-green" style="margin: 5px; margin-right: 50px;">Impacto</span>
+      </div>
+    </div>
+    <div class="col-sm-12" *ngFor="let atr of avalia.atributos; let i = index;">
+      <div class="row" style="padding-bottom: 20px;">
+        <div class="col">
+          <span> {{ atr.letra_atributo }}) {{ atr.descricao_atributo }}</span>
+        </div>
+        <div class="col-auto">
+          <span class="badge bg-yellow" style="margin: 5px;">
+            {{ atr.class_abrangencia_atributo }}-{{ atr.nome_abrangencia_atributo }}</span>
+          <span class="badge bg-light-blue" style="margin: 5px;">
+            {{ atr.class_complexidade_atributo }}-{{ atr.nome_complexidade_atributo }}</span>
+          <span class="badge bg-green" style="margin: 5px;">
+            {{ atr.class_impacto_atributo }}-{{ atr.nome_impacto_atributo }}</span>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn" id="div_button" (click)="Collapse1(i)">
+            <i class="fa " [ngClass]="{'fa-minus': isOpen1[i] === true ,'fa-plus': isOpen1[i]  === false }"></i>
+          </button>
+        </div>
+      </div>
+      <div class="col-sm-12" [collapse]="!collapsedAtr1[i]">
+        <!-- BADGE YELLOW -->
+        <div class="row" style="padding-bottom: 20px; padding-left: 5px;">
+          <div class="col-auto" style="margin: 5px;">
+            <span class="badge bg-yellow">
+              {{ atr.class_abrangencia_atributo }}-{{ atr.nome_abrangencia_atributo }}</span>
+          </div>
+          <div class="col">
+            <span>{{ atr.descricao_abrangencia_atributo }}</span>
+          </div>
+          <div class="col-auto">
+            <button type="button" style="font-size: 0.75rem;" class="btn" id="div_button" (click)="Collapse2(i)">Opções
+              <i class="fa " [ngClass]="{'fa-toggle-up': isOpen2[i] === true ,'fa-toggle-down': isOpen2[i]  === false }"></i>
+              <!-- <i class="fa fa-toggle-up"></i> -->
+            </button>
+          </div>
+        </div>
+        <!-- BADGE BG-BLACK -->
+        <div class="col-sm-12" [collapse]="!collapsedAtr2[i]">
+          <div class="row" style="padding-bottom: 20px; padding-left: 10px;">
+            <div class="col-sm-2" style="margin: 5px;">
+              <span class="badge bg-black">
+                {{ atr.class_abrangencia_atributo2 }}-{{ atr.nome_abrangencia_atributo2 }}
+              </span>
+            </div>
+            <div class="col">
+              <span class="text-center">{{ atr.descricao_abrangencia_atributo2 }}</span>
+            </div>
+          </div>
+          <div class="row" style="padding-bottom: 20px; padding-left: 10px;">
+            <div class="col-sm-2" style="margin: 5px;">
+              <span class="badge bg-black">
+                {{ atr.class_complexidade_atributo3 }}-{{ atr.nome_complexidade_atributo3 }}
+              </span>
+            </div>
+            <div class="col">
+              <span class="text-center">{{ atr.descricao_complexidade_atributo3 }}</span>
+            </div>
+          </div>
+        </div>
+        <!-- BADGE LIGHT-BLUE -->
+        <div class="row" style="padding-bottom: 20px; padding-left: 5px;">
+          <div class="col-auto" style="margin: 5px;">
+            <span class="badge bg-light-blue">
+              {{ atr.class_complexidade_atributo }}-{{ atr.nome_complexidade_atributo }}</span>
+          </div>
+          <div class="col">
+            <span>{{ atr.descricao_complexidade_atributo }}</span>
+          </div>
+          <div class="col-auto">
+            <button type="button" style="font-size: 0.75rem;" class="btn" id="div_button" (click)="Collapse3(i)">Opções
+              <i class="fa " [ngClass]="{'fa-toggle-up': isOpen3[i] === true ,'fa-toggle-down': isOpen3[i]  === false }"></i>
+            </button>
+          </div>
+        </div>
+        <!-- BADGE BG-BLACK -->
+        <div class="col-sm-12" [collapse]="!collapsedAtr3[i]">
+          <div class="row" style="padding-bottom: 20px; padding-left: 10px;">
+            <div class="col-sm-2" style="margin: 5px;">
+              <span class="badge bg-black">
+                {{ atr.class_complexidade_atributo2 }}-{{ atr.nome_complexidade_atributo2 }}
+              </span>
+            </div>
+            <div class="col">
+              <span>{{ atr.descricao_complexidade_atributo2 }}</span>
+            </div>
+          </div>
+          <div class="row" style="padding-bottom: 20px; padding-left: 10px;">
+            <div class="col-sm-2" style="margin: 5px;">
+              <span class="badge bg-black">
+                {{ atr.class_complexidade_atributo3 }}-{{ atr.nome_complexidade_atributo3 }}
+              </span>
+            </div>
+            <div class="col">
+              <span>{{ atr.descricao_complexidade_atributo3 }}</span>
+            </div>
+          </div>
+        </div>
+        <!-- BADGE GREEN -->
+        <div class="row" style="padding-bottom: 20px; padding-left:5px;">
+          <div class="col-auto" style="margin: 5px;">
+            <span class="badge bg-green">
+              {{ atr.class_impacto_atributo }}-{{ atr.nome_impacto_atributo }}</span>
+          </div>
+          <div class="col">
+            <span>{{ atr.descricao_impacto_atributo }}</span>{{ atr.descricao_complexidade_atributo2 }}
+          </div>
+          <div class="col-auto">
+            <button type="button" style="font-size: 0.75rem;" class="btn" id="div_button" (click)="Collapse4(i)">Opções
+              <i class="fa " [ngClass]="{'fa-toggle-up': isOpen4[i] === true ,'fa-toggle-down': isOpen4[i]  === false }"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- BADGE BG-BLACK -->
+      <div class="col-sm-12" [collapse]="!collapsedAtr4[i]">
+        <div class="row" style="padding-bottom: 20px; padding-left: 15px;">
+          <div class="col-auto">
+            <span class="badge bg-black">
+              {{ atr.class_impacto_atributo2 }}-{{ atr.nome_impacto_atributo2 }}
+            </span>
+          </div>
+          <div class="col">
+            <span>{{ atr.descricao_impacto_atributo2 }}</span>
+          </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px; padding-left: 15px;">
+          <div class="col-auto">
+            <span class="badge bg-black">
+              {{ atr.class_impacto_atributo3 }}-{{ atr.nome_impacto_atributo3 }}
+            </span>
+          </div>
+          <div class="col">
+            <span>{{ atr.descricao_impacto_atributo3 }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Projetos -->
+  <div class="card-body">
+    <h6 class="h6 mb-6" style="padding-bottom: 20px;">Projetos</h6>
+    <div class="col-sm-12">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th style="width: 5%">#</th>
+              <th style="width: 70%; text-transform: initial;">Descrição</th>
+              <th>
+                <span class="badge bg-yellow">Abrangência</span>
+              </th>
+              <th>
+                <span class="badge bg-light-blue">Complexidade</span>
+              </th>
+              <th>
+                <span class="badge bg-green">Impacto</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pro of avalia.projetos; let i = index;">
+              <td>{{ i+1 }}</td>
+              <td>{{ pro.descricao_projeto }}</td>
+              <td>
+                <span class="badge bg-yellow">{{ pro.class_abrangencia_projeto }}-{{ pro.nome_abrangencia_projeto }}</span>
+              </td>
+              <td>
+                <span class="badge bg-light-blue">{{ pro.class_complexidade_projeto }}-{{ pro.nome_complexidade_projeto
+                  }}</span>
+              </td>
+              <td>
+                <span class="badge bg-green">{{ pro.class_impacto_projeto }}-{{ pro.nome_impacto_projeto }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Dados -->
+  <div class="card-body" id="hide">
+    <div class="row form-group align-self-center">
+      <div class="col-sm-4">
+        <label class="font-weight-bold">Pontuação Avaliação:</label>
+        <span style="font-size: 0.8rem;">{{ avalia.avaliacao[0].pontuacao.toFixed(2) }}</span>
+      </div>
+      <div class="col-sm-4">
+        <label class="font-weight-bold">Pontuação Atual:</label>
+        <span style="font-size: 0.8rem;">{{ (avalia.avaliacao[0].pontuacao + avalia.avaliacao[0].ajuste).toFixed(2) }}</span>
+      </div>
+      <div class="col-sm-4">
+        <label class="font-weight-bold">Ociosidade:</label>
+        <span style="font-size: 0.8rem;">{{ avalia.avaliacao[0].ociosidade }}%</span>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-sm-4">
+        <label class="font-weight-bold">FCT Avaliação: </label>
+        <span style="font-size: 0.8rem;">{{ avalia.avaliacao[0].fct_ideal }}</span>
+      </div>
+      <div class="col-sm-4">
+        <label class="font-weight-bold">FCT Atual: </label>
+        <span style="font-size: 0.8rem;">{{ avalia.avaliacao[0].referencia_fct_atual }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-primary" (click)="onPrintPage()">Imprimir</button>
+    <button class="btn btn-secondary ml-3" (click)="onPrintPDF()">Gerar PDF</button>
+    <button class="btn btn-secondary ml-3" (click)="onCancel()">Voltar</button>
+    </div>
+  </div>
+ </div> 

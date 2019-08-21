@@ -1,0 +1,304 @@
+<div class="card">
+  <div class="card-header">
+    <h1 class="heading h3 mb-3">Distribuição das Faixas</h1>
+  </div>
+  <form
+    [formGroup]="formFaixa"
+    #formDir="ngForm"
+    (ngSubmit)="adicionarFaixa()"
+    novalidate
+  >
+    <div class="card-body" style="padding-bottom: 0px;">
+      <div class="col-auto">
+        <div class="row justify-content-between">
+          <h1 class="h6 mb-6">Definição</h1>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col">
+            <label>Pontuação Mínima</label>
+          </div>
+          <div class="col">
+            <label>Pontuação Máxima</label>
+          </div>
+          <div class="col">
+            <label>Diferença</label>
+          </div>
+          <div class="col">
+            <label>Quantidade de Faixas</label>
+          </div>
+          <div class="col">
+            <label>Amplitude das Faixas</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="row" *ngFor="let distribuicao of distribuicao">
+          <div class="col">
+            <label
+              ><span class="badge bg-red">{{
+                distribuicao.pontuacao_minima
+              }}</span></label
+            >
+          </div>
+          <div class="col">
+            <label
+              ><span class="badge bg-yellow">{{
+                distribuicao.pontuacao_maxima
+              }}</span></label
+            >
+          </div>
+          <div class="col">
+            <label
+              ><span class="badge bg-light-blue">{{
+                (
+                  distribuicao.pontuacao_maxima - distribuicao.pontuacao_minima
+                ).toFixed(2)
+              }}</span></label
+            >
+          </div>
+          <div class="col">
+            <label
+              ><span class="badge bg-aqua">{{
+                distribuicao.qtde_faixas
+              }}</span></label
+            >
+          </div>
+          <div class="col">
+            <label
+              ><span class="badge bg-green">{{
+                (
+                  (distribuicao.pontuacao_maxima -
+                    distribuicao.pontuacao_minima) /
+                  distribuicao.qtde_faixas
+                ).toFixed(2)
+              }}</span></label
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="col-auto">
+        <div class="row justify-content-between">
+          <h1 class="h6 mb-6">Faixas</h1>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="table-responsive">
+          <table
+            class="table table-striped table-hover"
+            style="font-size: 0.8rem; text-align:center;"
+          >
+            <tbody class="">
+              <tr>
+                <th style="width: 10px">#</th>
+                <th style="width: 200px">Limite Inferior</th>
+                <th style="width: 200px">Limite Superior</th>
+                <th style="width: 400px">Pontuação de referência da Faixa</th>
+                <th style="width: 400px">Quantidade de Pessoas na Faixa</th>
+              </tr>
+              <tr id="tabela" *ngFor="let faixa of faixaList; let i = index">
+                <td>
+                  <label for="">{{ i + 1 }}</label>
+                </td>
+                <td>
+                  <label for="">
+                    <span class="badge bg-red">{{ faixa.limite_inferior.toFixed(2) }}</span>
+                  </label>
+                </td>
+                <td>
+                  <label for="">
+                    <span class="badge bg-yellow">{{
+                      faixa.limite_superior.toFixed(2)
+                    }}</span>
+                  </label>
+                </td>
+                <td>
+                  <label for="">
+                    <span class="badge bg-light-blue">{{
+                      faixa.pontuacao_referencia.toFixed(2)
+                    }}</span>
+                  </label>
+                </td>
+                <td>
+                  <label for="">
+                    <span class="badge bg-green">{{ faixa.qtde_pessoas }}</span>
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="table-responsive">
+          <table
+            class="table table-striped table-hover"
+            style="font-size: 0.8rem"
+          >
+            <tbody class="">
+              <tr>
+                <th style="width: 200px">Valor Total da Distribuição</th>
+                <th style="width: 200px">
+                  Referência FCT pela pontuação mínima
+                </th>
+                <th style="width: 200px"></th>
+              </tr>
+              <tr *ngFor="let item of distribuicao">
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    disabled
+                    name="valordistribuicao"
+                    value="{{
+                      this.formFaixa.get('valorDistribuicao').value
+                        | currency: 'BRL':'symbol-narrow'
+                    }}"
+                  />
+                </td>
+                <td>
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <select
+                        formControlName="vlrReferencia"
+                        class="form-control"
+                      >
+                        <option
+                          *ngFor="let ref of referencia"
+                          [value]="ref.id_referencia_fct_gfe"
+                          >{{ ref.num_referencia }} - {{ ref.cargo }} ({{
+                            ref.valor_referencia
+                              | currency: 'BRL':'symbol-narrow'
+                          }})</option
+                        >
+                      </select>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="col-md-12 col-form-label">
+                    <label>
+                      <input
+                        type="checkbox"
+                        formControlName="assumirPercCalculado"
+                        (click)="habDesCamposPercent()"
+                      />
+                      Informar o Percentual(%) Fixo
+                    </label>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" style="padding-top: 0px; padding-bottom: 0px;">
+      <div class="col-auto">
+        <div class="row justify-content-between">
+          <h1 class="h6 mb-6">Valor</h1>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="table-responsive">
+          <table
+            class="table table-striped table-hover"
+            style="font-size: 0.8rem"
+          >
+            <tbody class="">
+              <tr>
+                <th>Faixa</th>
+                <th>Percentual(%) Fixo</th>
+                <th style="width:12%">Valor Total Fixo</th>
+                <th style="width:12%">Valor Rateio por Pessoa Fixo</th>
+                <th style="width:12%">Valor Rateio Somado por Faixa Fixo</th>
+                <th style="width:12%">Percentual Calculado</th>
+                <th style="width:12%">Valor Total Calculado</th>
+                <th style="width:12%">Valor Rateio por Pessoa Calculado</th>
+                <th style="width:12%">Valor Rateio Somado por Faixa</th>
+              </tr>
+              <tr
+                formArrayName="listFaixas"
+                *ngFor="let item of getListaFaixas(formFaixa); let i = index"
+              >
+                <td [formGroupName]="i">
+                  <span>{{ i + 1 }}</span>
+                </td>
+                <td [formGroupName]="i">
+                  <label for="">
+                    <input
+                      type="text"
+                      formControlName="percentualFixo"
+                      class="form-control"
+                      style="width: 50px;"
+                      maxlength="2"
+                    />
+                  </label>
+                </td>
+                <td [formGroupName]="i">
+                  <label for="">
+                    <span class="badge bg-yellow">{{ item.value.valorTotalFixo | currency: 'BRL':true }}</span>
+                  </label>
+                </td>
+
+                <td [formGroupName]="i">
+                  <label for="">
+                    <span class="badge bg-yellow">{{ item.value.valorRateioPessoa | currency: 'BRL':true }}</span>
+                  </label>
+                </td>
+                <td [formGroupName]="i">
+                  <label for="">
+                    <span class="badge bg-aqua">{{ item.value.valorRateioSomado | currency: 'BRL':true }}</span>
+                  </label>
+                </td>
+                <td [formGroupName]="i">
+                  <label for="">
+                    <span class="badge bg-green">{{ item.value.percentualCalculado }}%</span>
+                  </label>
+                </td>
+                <td [formGroupName]="i">
+                  <label for="">
+                    <span class="badge bg-light-blue">{{ item.value.valorTotalCalculado | currency:'BRL':true }}</span>
+                  </label>
+                </td>
+                <td [formGroupName]="i">
+                  <label for="">
+                    <span class="badge bg-light-blue">{{
+                      item.value.valorRateioPessoaCalculado
+                        | currency: 'BRL':true
+                    }}</span>
+                  </label>
+                </td>
+                <td [formGroupName]="i">
+                  <label for="">
+                    <span class="badge bg-aqua">{{
+                      item.value.valorRateioSomadoFaixa | currency: 'BRL':true
+                    }}</span>
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit">
+        Salvar
+      </button>
+      <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

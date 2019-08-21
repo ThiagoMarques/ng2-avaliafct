@@ -1,0 +1,184 @@
+<div class="card">
+    <form [formGroup]="formColaborador" #formDir="ngForm" (ngSubmit)="onCreate()" novalidate>
+        <div class="card-header">
+            <h1 class="heading h3 mb-3">Detalhes do Colaborador</h1>
+        </div>
+        <div class="card-body">
+            <!-- Matrícula -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="matricula" class="required">Matrícula</label>
+                        <input type="text" placeholder="999999999" id="matricula" class="form-control" formControlName="matricula"
+                            [ngClass]="{'is-invalid': (form.matricula.invalid && form.matricula.touched) || (form.matricula.invalid && formDir.submitted), 'is-valid': form.matricula.valid}">
+                        <div class="invalid-feedback" *ngIf="(form['matricula'].invalid && form['matricula'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Matrícula é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Nome -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="nome" class="required">Nome</label>
+                        <input type="text" placeholder="Escreva o nome completo do colaborador" id="nome" class="form-control"
+                            formControlName="nome" [ngClass]="{'is-invalid': (form.nome.invalid && form.nome.touched) || (form.nome.invalid && formDir.submitted), 'is-valid': form.nome.valid}">
+                        <div class="invalid-feedback" *ngIf="(form['nome'].invalid && form['nome'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Nome é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Telefone -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="telefone" class="required">Telefone</label>
+                        <input type="text" placeholder="(99) 9999-9999" id="telefone" class="form-control"
+                            formControlName="telefone" [ngClass]="{'is-invalid': (form.telefone.invalid && form.telefone.touched) || (form.telefone.invalid && formDir.submitted), 'is-valid': form.telefone.valid}">
+                        <div class="invalid-feedback" *ngIf="(form['telefone'].invalid && form['telefone'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Telefone é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Especialização -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="especialidade" class="required">Especialização</label>
+                        <select id="especialidade" class="form-control" formControlName="especialidade" [ngClass]="{'is-invalid': (form.especialidade.invalid && form.especialidade.touched) || (form.especialidade.invalid && formDir.submitted), 'is-valid': form.especialidade.valid}">
+                            <option value="" disabled selected>Selecione...</option>
+                            <option value="Atendimento">Atendimento</option>
+                            <option value="Apoio Operacional">Apoio Operacional</option>
+                            <option value="Comunicação Social">Comunicação Social</option>
+                            <option value="Desenvolvimento de Sistemas">Desenvolvimento de Sistemas</option>
+                            <option value="Programação Visual">Programação Visual</option>
+                            <option value="Programação de Computador">Programação de Computador</option>
+                        </select>
+                        <div class="invalid-feedback" *ngIf="(form['especialidade'].invalid && form['especialidade'].touched) || formDir.submitted">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Especialização é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Salário -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="salario" class="required">Salário</label>
+                        <input type="text" placeholder="Informar o valor do salário" id="salario" class="form-control"
+                            formControlName="salario" [ngClass]="{'is-invalid': (form.salario.invalid && form.salario.touched) || (form.salario.invalid && formDir.submitted), 'is-valid': form.salario.valid}">
+                        <div class="invalid-feedback" *ngIf="(form['salario'].invalid && form['salario'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Salário é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 8,5% do Salário -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="percentual_salario" class="required">8,5% do Salário</label>
+                        <input type="text" placeholder="Informar o valor correspondente a 8,5% do salário" id="percentual_salario"
+                            class="form-control" formControlName="percentual_salario" [ngClass]="{'is-invalid': (form.percentual_salario.invalid && form.percentual_salario.touched) || (form.percentual_salario.invalid && formDir.submitted), 'is-valid': form.percentual_salario.valid}">
+                        <div class="invalid-feedback" *ngIf="(form['percentual_salario'].invalid && form['percentual_salario'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo 8,5% do Salário é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Referência FCT -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="referenciaFct" class="required">Referência FCT</label>
+                        <select id="referenciaFct" class="form-control" formControlName="referenciaFct" [ngClass]="{'is-invalid': (form.referenciaFct.invalid && form.referenciaFct.touched) || (form.referenciaFct.invalid && formDir.submitted), 'is-valid': form.referenciaFct.valid}">
+                            <option *ngFor="let referencias of referencia; let i = index" ngValue="{{referencias.id_referencia_fct_gfe}}">{{referencias.num_referencia
+                                + " - " + referencias.cargo + " (R$ " + referencias.valor_referencia + ")"}}</option>
+                        </select>
+                        <div class="invalid-feedback" *ngIf="(form['referenciaFct'].invalid && form['referenciaFct'].touched) || formDir.submitted">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Referência FCT é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Divisão -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="sigla" class="required">Divisão</label>
+                        <select id="sigla" class="form-control" formControlName="sigla" [ngClass]="{'is-invalid': (form.sigla.invalid && form.referenciaFct.touched) || (form.sigla.invalid && formDir.submitted), 'is-valid': form.sigla.valid}">
+                            <option *ngFor="let divisoes of divisao; let i = index" value="{{divisoes.id_divisao}}">{{divisoes.sigla}}</option>
+                        </select>
+                        <div class="invalid-feedback" *ngIf="(form['sigla'].invalid && form['sigla'].touched) || formDir.submitted">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Divisão é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Perfil de Acesso -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="perfil_acesso" class="required">Perfil de Acesso</label>
+                        <select id="perfil_acesso" class="form-control" formControlName="perfil_acesso" [ngClass]="{'is-invalid': (form.perfil_acesso.invalid && form.perfil_acesso.touched) || (form.perfil_acesso.invalid && formDir.submitted), 'is-valid': form.perfil_acesso.valid}">
+                            <option value="" disabled selected>Selecione...</option>
+                            <option value="1">ADMINISTRADOR</option>
+                            <option value="2">LÍDER</option>
+                            <option value="3">COLABORADOR</option>
+                        </select>
+                        <div class="invalid-feedback" *ngIf="(form['perfil_acesso'].invalid && form['perfil_acesso'].touched) || formDir.submitted">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Perfil de Acesso é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" [disabled]="!formColaborador.valid" type="submit">
+                Salvar
+            </button>
+            <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>

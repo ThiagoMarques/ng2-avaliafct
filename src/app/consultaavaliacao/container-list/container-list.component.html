@@ -1,0 +1,125 @@
+<div class="card card-body">
+  <div class="card-header">
+    <div class="col-auto">
+      <div class="row justify-content-between">
+        <h1 class="h3 heading mb-3">Avaliações Registradas</h1>
+        <a *ngIf="perfil() == 'ADMINISTRADOR' || perfil() == 'LIDER'" routerLink="/avaliacao/">
+          <i class="fa fa-plus" aria-hidden="true"></i> Nova Avaliação
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="col-sm-12" style="padding-bottom: 20px;">
+      <div class="row">
+        <div class="col-auto">
+          <span>#</span>
+        </div>
+        <div class="col-auto">
+          <span>Divisão</span>
+        </div>
+        <div class="col">
+          <span>Colaborador</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12" *ngFor="let aval of avaliacaoDetalhe; let i = index">
+      <div class="row" style="font-weight: bold; font-size: 0.8rem;padding-bottom: 20px;">
+        <div class="col-auto">
+          <span>{{ i+1 }}</span>
+        </div>
+        <div class="col-auto">
+          <span>{{ aval.listGroup.sigla_divisao }}</span>
+        </div>
+        <div class="col">
+          <span>{{ aval.listGroup.no_colaborador }}</span>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn" id="div_button" (click)="Collapse(i)">
+            <i class="fa " [ngClass]="{'fa-minus': isOpen[i] === true ,'fa-plus': isOpen[i]  === false }"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-sm-12" *ngFor="let items of aval.listDetalhe; let j = index;" [collapse]="!collapsed[i]">
+        <table class="table table-borderless table-sm" style="font-size: 0.8rem;">
+          <thead style="text-align:center;">
+            <!-- <th scope="col" style="width: 30px;">
+              <span style="color: #5f5f7a;">{{ i+1 }}.{{ j+1 }}</span>
+            </th> -->
+            <th scope="col">
+                <span class="badge bg-black" style="margin: 10px;">Data Avaliação</span>
+            </th>
+            <th scope="col">
+              <span class="badge bg-light-blue" style="margin: 10px;">FCT Atual</span>
+            </th>
+            <th scope="col">
+              <span class="badge bg-light-blue" style="margin: 10px;">Pontuação Atual</span>
+            </th>
+            <th scope="col">
+              <span class="badge bg-red" style="margin: 10px;">Diferença</span>
+            </th>
+            <th scope="col">
+              <span class="badge bg-green" style="margin: 10px;">Pontuação Avaliação</span>
+            </th>
+            <th scope="col" *ngIf="perfil() == 'ADMINISTRADOR' || perfil() == 'LIDER'">
+              <span class="badge bg-green" style="margin: 10px;">FCT Avaliação</span>
+            </th>
+            <th></th>
+            <th></th>
+          </thead>
+          <tbody style="text-align:center;">
+            <!-- <td></td> -->
+            <td><span style="color: #5f5f7a; font-weight: bold;">{{ items.dt_resultado }}</span></td>
+            <td>
+              <span>{{ items.fct_atual }}</span>
+            </td>
+            <td>
+              <span>{{ ((items.pontuacao - items.ajuste) + (2 * items.ajuste)).toFixed(2) }}</span>
+            </td>
+            <td>
+              <span>{{ (items.ajuste * (-1)).toFixed(2) }}</span>
+            </td>
+            <td>
+              <span>{{ items.pontuacao.toFixed(2) }}</span>
+            </td>
+            <td *ngIf="perfil() == 'ADMINISTRADOR' || perfil() == 'LIDER'">
+              <span>{{ items.fct_ideal }}</span>
+            </td>
+            <td>
+              <button type="button" class="btn btn-circle-primary btn-sm" [routerLink]="['/consultas/edit/', items.id_resultado]">
+                <span class="sr-only">Editar</span>
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </td>
+            <td *ngIf="perfil() == 'ADMINISTRADOR' || perfil() == 'LIDER'">
+              <button type="button" class="btn btn-circle-danger btn-sm" (click)="openModal(msg)">
+                <span class="sr-only">Excluir</span>
+                <i class="fa fa-times-circle-o" aria-hidden="true" alt="Remover registro"></i>
+              </button>
+              <ng-template #msg>
+                <div class="modal-body text-center">
+                  <p>Tem certeza que quer APAGAR a Avaliação?</p>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="deleteAvaliacao(items, aval.listDetalhe)"
+                  >
+                    Sim
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-default"
+                    (click)="decline()"
+                  >
+                    Não
+                  </button>
+                </div>
+              </ng-template>
+            </td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

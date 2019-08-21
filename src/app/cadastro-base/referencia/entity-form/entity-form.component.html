@@ -1,0 +1,112 @@
+<div class="card">
+  <form [formGroup]="formReferencia" #formDir="ngForm" (ngSubmit)="onCreate()" novalidate>
+    <div class="card-header">
+      <h1 class="heading h3 mb-3">Detalhes da Referência FCT</h1>
+    </div>
+    <div class="card-body">
+      <!-- Cargo -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="cargo" class="required">Cargo</label>
+            <select id="cargo" class="form-control" formControlName="cargo" [ngClass]="{'is-invalid': (form.cargo.invalid && form.cargo.touched) || (form.cargo.invalid && formDir.submitted), 'is-valid': form.cargo.valid}">
+              <option [selected]="true" value="">Selecione</option>
+              <option value="Auxiliar">Auxiliar</option>
+              <option value="Técnico">Técnico</option>
+              <option value="Analista">Analista</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['cargo'].invalid && form['cargo'].touched || formDir.submitted)">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Cargo é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Referência -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="num_referencia" class="required">Referência</label>
+            <select id="num_referencia" class="form-control" formControlName="num_referencia" [ngClass]="{'is-invalid': (form.num_referencia.invalid && form.num_referencia.touched) || (form.num_referencia.invalid && formDir.submitted), 'is-valid': form.num_referencia.valid}">
+              <option value="" [selected]="true">Selecione...</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+              <option value="32">32</option>
+              <option value="33">33</option>
+              <option value="34">34</option>
+              <option value="35">35</option>
+              <option value="36">36</option>
+              <option value="37">37</option>
+              <option value="38">38</option>
+              <option value="39">39</option>
+              <option value="40">40</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['num_referencia'].invalid && form['num_referencia'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Referência é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Valor -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="valor_referencia" class="required">Valor</label>
+            <input type="text" placeholder="Informe o valor de referência da FCT" name="valor_referencia" id="valor_referencia" class="form-control" formControlName="valor_referencia">
+            <div class="invalid-feedback" *ngIf="(form['valor_referencia'].invalid && form['valor_referencia'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Valor é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" [disabled]="!formReferencia.valid" type="submit">
+        Salvar
+      </button>
+      <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

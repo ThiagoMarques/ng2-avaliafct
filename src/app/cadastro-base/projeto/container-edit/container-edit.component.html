@@ -1,0 +1,98 @@
+<div class="card">
+  <form [formGroup]="formProjeto" #formDir="ngForm" (ngSubmit)="editarCrud()" novalidate>
+    <div class="card-header">
+      <h1 class="heading h3 mb-3">Detalhes do Projeto</h1>
+      <br>
+    </div>
+    <div class="card-body">
+      <!-- Código de Serviço -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="cod_servico" class=required>Código de Serviço</label>
+            <input type="text" name="cod_servico" id="cod_servico" class="form-control" formControlName="cod_servico" [ngClass]="{'is-invalid': (form.cod_servico.invalid && form.cod_servico.touched) || (form.cod_servico.invalid && formDir.submitted), 'is-valid': form.cod_servico.valid}">
+            <div class="invalid-feedback" *ngIf="(form['cod_servico'].invalid && form['cod_servico'].touched || formDir.submitted)">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Código de Serviço é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Título -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="titulo" class=required>Título</label>
+            <input type="text" name="titulo" id="titulo" class="form-control" formControlName="titulo" [ngClass]="{'is-invalid': (form.titulo.invalid && form.titulo.touched) || (form.titulo.invalid && formDir.submitted), 'is-valid': form.titulo.valid}">
+            <div class="invalid-feedback" *ngIf="(form['titulo'].invalid && form['titulo'].touched || formDir.submitted)">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Título é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Descrição -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="descricao" class="required">Descrição</label>
+            <textarea class="form-control" placeholder="Descreva os detalhes do Projeto" formControlName="descricao" name="descricao"
+              id="descricao" cols="30" rows="3" [ngClass]="{'is-invalid': (form.descricao.invalid && form.descricao.touched) || (form.descricao.invalid && formDir.submitted), 'is-valid': form.descricao.valid}"></textarea>
+            <div class="invalid-feedback" *ngIf="(form['descricao'].invalid && form['descricao'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Descrição é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Abrangência -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="abrangencia" class="required">Abrangência</label>
+            <input type="text" name="abrangencia" id="abrangencia" class="form-control" formControlName="abrangencia" [ngClass]="{'is-invalid': (form.abrangencia.invalid && form.abrangencia.touched) || (form.abrangencia.invalid && formDir.submitted), 'is-valid': form.abrangencia.valid}">
+            <div class="invalid-feedback" *ngIf="(form['abrangencia'].invalid && form['abrangencia'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Abrangência é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Datas -->
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="dt_inicio">Data Início</label>
+            <input type="text" mask="00/00/0000" name="dt_inicio" placeholder="Data Início" id="dt_inicio" formControlName="dt_inicio" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="dt_fim">Data Fim</label>
+            <input type="text" mask="00/00/0000" name="dt_fim" placeholder="Data Fim" id="dt_fim" formControlName="dt_fim" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit">
+        Salvar
+      </button>
+      <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

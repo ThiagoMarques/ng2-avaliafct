@@ -1,0 +1,90 @@
+<div class="card">
+  <form [formGroup]="formDivisao" #formDir="ngForm" (ngSubmit)="onCreate()" novalidate>
+    <div class="card-header">
+      <h1 class="heading h3 mb-3">Detalhes da Divisão</h1>
+    </div>
+    <div class="card-body">
+      <!-- Sigla -->
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="form-group">
+                  <label for="divisao" class="required">Sigla</label>
+                  <input type="text" placeholder="Preencha com a sigla até 5 caracteres" id="sigla" class="form-control" formControlName="sigla" [ngClass]="{'is-invalid': (form.sigla.invalid && form.sigla.touched) || (form.sigla.invalid && formDir.submitted), 'is-valid': form.sigla.valid}">
+                  <div class="invalid-feedback" *ngIf="(form['sigla'].invalid && form['sigla'].touched || formDir.submitted)">
+                      <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      O campo Sigla é obrigatório!
+                  </div>
+                  <div class="valid-feedback">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Nome -->
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="form-group">
+                  <label for="nome" class="required">Nome</label>
+                  <input type="text" placeholder="Preencha com o nome completo da Divisão" id="nome" class="form-control" formControlName="nome" [ngClass]="{'is-invalid': (form.nome.invalid && form.nome.touched) || (form.nome.invalid && formDir.submitted), 'is-valid': form.nome.valid}">
+                  <div class="invalid-feedback" *ngIf="(form['nome'].invalid && form['nome'].touched || formDir.submitted)">
+                      <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      O campo Nome é obrigatório!
+                  </div>
+                  <div class="valid-feedback">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- UF -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="uf" class="required">Classificação</label>
+            <select id="uf" class="form-control" formControlName="uf" 
+            [ngClass]="{'is-invalid': (form.uf.invalid && form.uf.touched) || (form.uf.invalid && formDir.submitted), 'is-valid': form.uf.valid}">
+              <option value="" disabled selected>Selecione...</option>
+              <option value="BH">BH</option>
+              <option value="DF">DF</option>
+              <option value="SD">SD</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['uf'].invalid && form['uf'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo UF é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Descrição -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="descricao" class="required">Descrição</label>
+            <textarea class="form-control" placeholder="Descreva os detalhes da Divisao"
+              formControlName="descricao" name="descricao" id="descricao" cols="30" rows="5" 
+              [ngClass]="{'is-invalid': (form.descricao.invalid && form.descricao.touched) || (form.descricao.invalid && formDir.submitted), 'is-valid': form.descricao.valid}"></textarea>
+            <div class="invalid-feedback" *ngIf="(form['descricao'].invalid && form['descricao'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Descrição é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <!-- <button class="btn btn-primary" [disabled]="!formDivisao.valid" type="submit"> -->
+      <button class="btn btn-primary" type="submit">
+        Salvar
+      </button>
+      <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,48 @@
+<!--
+  Exemplo de página usando o ngx-formly
+ -->
+<h1 class="heading h3 mb-3">Exemplos usando o ngx-formly</h1>
+
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="heading h4">Exemplo auth padrão</h2>
+        <form [formGroup]="myForm" (ngSubmit)="submit(model)">
+          <formly-form [form]="myForm" [model]="model" [fields]="fields">
+            <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary">Enviar</button>
+          </formly-form>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="heading h4">Exemplo auth inline</h2>
+        <form [formGroup]="myForm" (ngSubmit)="submit(model)">
+          <formly-form [form]="myForm" class="row" [model]="model" [fields]="fieldsInline">
+            <div class="col-12">
+              <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary">Enviar</button>
+            </div>
+          </formly-form>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="heading h4">Exemplo de endereço</h2>
+        <form [formGroup]="myForm" (ngSubmit)="submit(model)">
+          <formly-form [form]="myForm" class="row" [model]="model" [options]="options" [fields]="addressFieldsInline">
+            <div class="col-12">
+              <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary">Enviar</button>
+              <button type="reset" class="btn btn-secondary ml-3" (click)="options.resetModel()">Limpar</button>
+            </div>
+          </formly-form>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

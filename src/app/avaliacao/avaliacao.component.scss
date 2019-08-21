@@ -1,0 +1,75 @@
+#resultado > * {
+    position: fixed !important;
+    text-align: center;
+    // right: 30px;
+    // padding: 25px;
+    // top: 55px;
+    // min-height: 200px;
+    // min-width: 20%;
+    z-index: 11;
+    // padding: 0;
+    position: fixed;
+    margin-right: 30px;
+}
+
+.table-responsive {
+    .bg-yellow {
+        border-radius: 50rem !important;
+        color: white;
+        background-color: #f39c12 !important;
+        padding: 3px 5px;
+        cursor: pointer; 
+    }
+    .bg-light-blue {
+        border-radius: 50rem !important;
+        color: white;
+        background-color: #3c8dbc !important;
+        padding: 3px 5px;
+        cursor: pointer; 
+    } 
+    .bg-green {
+        border-radius: 50rem !important;
+        color: white;
+        background-color: #00a65a !important;
+        padding: 3px 5px;
+        cursor: pointer; 
+    }   
+}
+#button_project1 {
+    font-size: 12px;
+    margin-right: 5px;
+    margin-left: 15px;
+} 
+#button_project2 {
+    font-size: 12px;
+}
+
+
+#button {
+    color: #97a0b3;
+    background: #ffffff;
+    background-color: #ffffff;
+    padding: 0px;
+}
+
+.rating {
+ label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  input {
+   &[type="radio"],
+   &[type="checkbox"] {
+    margin-right: 10px;
+   }
+  }
+ }
+}
+
+// Fix para scroll quando adiciona novos projetos
+@media (min-width: 768px) {
+    .table-responsive {
+        overflow-x: visible;
+    }
+}

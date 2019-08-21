@@ -1,0 +1,151 @@
+<div class="card">
+    <form [formGroup]="formDistribuicao" #formDir="ngForm" (ngSubmit)="save()" novalidate>
+        <div class="card-header">
+            <h1 class="heading h3 mb-3">Detalhes da Distribuição de Valores da FCT</h1>
+
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="valor" class="required">Valor</label>
+                        <input type="text" name="valor" formControlName="valor" placeholder="Informar o valor total a ser utilizado para distribuição da FCT no departamento"
+                            id="valor" currencyMask class="form-control" [ngClass]="{'is-invalid': (form.valor.invalid && form.valor.touched) || (form.valor.invalid && formDir.submitted), 'is-valid': form.valor.valid}">
+                        <div class="invalid-feedback" *ngIf="(form['valor'].invalid && form['valor'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Valor é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="qtde_faixas" class="required">Quantidade de Faixas</label>
+                        <select name="" class="form-control" formControlName="qtde_faixas"
+                            id="qtde_faixas" [ngClass]="{'is-invalid': (form.qtde_faixas.invalid && form.qtde_faixas.touched) || (form.qtde_faixas.invalid && formDir.submitted), 'is-valid': form.qtde_faixas.valid}">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <div class="invalid-feedback" *ngIf="(form['qtde_faixas'].invalid && form['qtde_faixas'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Quantidade de Faixas é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="pontuacao_minima" class="required">Pontuação Mínima</label>
+                        <input type="text" name="pontuacao_minima" formControlName="pontuacao_minima" id="pontuacao_minima"
+                            maxlength="8" readonly class="form-control" [ngClass]="{'is-invalid': (form.pontuacao_minima.invalid && form.pontuacao_minima.touched) || (form.pontuacao_minima.invalid && formDir.submitted), 'is-valid': form.pontuacao_minima.valid}">
+                        <div class="invalid-feedback" *ngIf="(form['pontuacao_minima'].invalid && form['pontuacao_minima'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Pontuação Mínima é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="pontuacao_maxima" class="required">Pontuação Máxima</label>
+                        <input type="text" name="pontuacao_maxima" formControlName="pontuacao_maxima" id="pontuacao_maxima"
+                            maxlength="8" readonly class="form-control" [ngClass]="{'is-invalid': (form.pontuacao_maxima.invalid && form.pontuacao_maxima.touched) || (form.pontuacao_maxima.invalid && formDir.submitted), 'is-valid': form.pontuacao_maxima.valid}">
+                        <div class="invalid-feedback" *ngIf="(form['pontuacao_maxima'].invalid && form['pontuacao_maxima'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Pontuação Máxima é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="diferenca" class="required">Diferença entre as Pontuações Máxima e Mínima</label>
+                        <input type="text" name="diferenca" formControlName="diferenca" id="diferenca" maxlength="8"
+                            readonly class="form-control" [ngClass]="{'is-invalid': (form.diferenca.invalid && form.diferenca.touched) || (form.diferenca.invalid && formDir.submitted), 'is-valid': form.diferenca.valid}">
+                        <div class="invalid-feedback" *ngIf="(form['diferenca'].invalid && form['diferenca'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Diferença entre as Pontuações Máxima e Mínima é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="amplitude_faixas" class="required">Amplitude das Faixas</label>
+                        <input type="text" name="amplitude_faixas" formControlName="amplitude_faixas" maxlength="8"
+                            readonly class="form-control" [ngClass]="{'is-invalid': (form.amplitude_faixas.invalid && form.amplitude_faixas.touched) || (form.amplitude_faixas.invalid && formDir.submitted), 'is-valid': form.amplitude_faixas.valid}">
+                        <div class="invalid-feedback" *ngIf="(form['amplitude_faixas'].invalid && form['amplitude_faixas'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Amplitude das Faixas é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="dt_registro" class="required">Data do Registro</label>
+                        <input type="text" name="dt_registro" formControlName="dt_registro" readonly class="form-control"
+                            [ngClass]="{'is-invalid': (form.dt_registro.invalid && form.dt_registro.touched) || (form.dt_registro.invalid && formDir.submitted), 'is-valid': form.dt_registro.valid}">
+                        <div class="invalid-feedback" *ngIf="(form['dt_registro'].invalid && form['dt_registro'].touched || formDir.submitted)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            O campo Data do Registro é obrigatório!
+                        </div>
+                        <div class="valid-feedback">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" type="submit">
+                Salvar
+            </button>
+            <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>

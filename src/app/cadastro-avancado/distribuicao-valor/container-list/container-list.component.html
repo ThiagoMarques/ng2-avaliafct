@@ -1,0 +1,66 @@
+<div class="card card-datatable">
+  <div class="card-body">
+      <div class="col-auto">
+          <div class="row justify-content-between">
+              <h1 class="heading h3 mb-3">Distribuição Cadastrada</h1>
+          </div>
+          <div class="row justify-content-between">
+          </div>
+      </div>
+      <div class="table-responsive">
+          <form>
+              <ngx-datatable class="striped" [rows]="rows" [columnMode]="'flex'"
+                  [limit]="10" [headerHeight]="40" [footerHeight]="100" [rowHeight]="'auto'"
+                  [selected]="selected" [selectAllRowsOnPage]="false">
+                  <ngx-datatable-column [flexGrow]="0" name="#" headerClass="text-center" cellClass="text-center">
+                      <ng-template let-rowIndex="rowIndex+1" ngx-datatable-cell-template>
+                          <div class="d-flex flex-row justify-content-center">
+                              {{rowIndex}}
+                          </div>
+                      </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [flexGrow]="1" name="Valor a ser distribuído em FCT" headerClass="text-center" cellClass="text-center">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <div class="d-flex flex-row justify-content-center">
+                            R$ {{(row.valor).toFixed(2)}}
+                          </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+                  <ngx-datatable-column [flexGrow]="1" name="Pontuação Mínima registrada" prop='pontuacao_minima'></ngx-datatable-column>
+                  <ngx-datatable-column [flexGrow]="1" name="Pontuação Máxima registrada" prop='pontuacao_maxima'></ngx-datatable-column>
+                  <ngx-datatable-column [flexGrow]="1" name="Diferença entre as pontuações" headerClass="text-center" cellClass="text-center">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <div class="d-flex flex-row justify-content-center">
+                          {{(row.pontuacao_maxima - row.pontuacao_minima).toFixed(2)}}
+                        </div>
+                      </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [flexGrow]="1" name="Amplitude calculada das faixas" headerClass="text-center" cellClass="text-center">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <div class="d-flex flex-row justify-content-center">
+                          {{((row.pontuacao_maxima - row.pontuacao_minima) / row.qtde_faixas).toFixed(2)}}
+                        </div>
+                      </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [flexGrow]="1" name="Quantidade de Faixas definida" prop='qtde_faixas'></ngx-datatable-column>
+                  <ngx-datatable-column [flexGrow]="1" name="Data do Registro" prop='dt_registro'></ngx-datatable-column>
+                  <ngx-datatable-column [flexGrow]="1" name="AÇÕES" headerClass="text-center" cellClass="text-center"
+                      [width]="30">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                          <div class="d-flex flex-row justify-content-center">
+                              <button type="button" class="btn btn-circle-primary btn-sm" [routerLink]="['/cadastro-avancado/distribuicao/edit/', row.id_distribuicao]">
+                                  <span class="sr-only">Editar</span>
+                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </button>
+                              <button type="button" class="btn btn-circle-danger btn-sm" (click)="onDeleteDistribuicao(row, template)">
+                                  <span class="sr-only">Excluir</span>
+                                  <i class="fa fa-times-circle-o" aria-hidden="true" alt="Remover registro"></i>
+                              </button>
+                          </div>
+                      </ng-template>
+                  </ngx-datatable-column>
+              </ngx-datatable>
+          </form>
+      </div>
+  </div>
+</div>

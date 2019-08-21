@@ -1,0 +1,26 @@
+<form (submit)="onSelectTheme(selectedTheme)">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="heading h3 mb-3">Preferências</h1>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="theme" class="required">Tema:</label>
+              <select #selectTheme name="selectedTheme" id="theme" class="form-control" [value]="selectedTheme" (change)="onSelectTheme(selectTheme.value)">
+                <option value="">Nenhum</option>
+                <option value="alto-contraste">Alto Contraste</option>
+                <!-- <option value="neoid">NeoID</option> -->
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary" type="submit">
+          Salvar
+        </button>
+      </div>
+    </div>
+  </form>

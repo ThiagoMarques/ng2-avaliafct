@@ -1,0 +1,115 @@
+<div class="card">
+  <form [formGroup]="formAtributo" #formDir="ngForm" (ngSubmit)="editarCrud()" novalidate>
+    <div class="card-header">
+      <h1 class="heading h3 mb-3">Detalhes do Atributo </h1>
+      <br>
+    </div>
+    <div class="card-body">
+      <!-- Descrição -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="descricao" class=required>Descrição</label>
+            <select class="form-control" formControlName="descricao" name="descricao" id="descricao" [ngClass]="{'is-invalid': (form.descricao.invalid && form.descricao.touched) || (form.descricao.invalid && formDir.submitted), 'is-valid': form.descricao.valid}">
+              <option value="" disabled [selected]="">Selecione</option>
+              <option value="a">a) Analisar as demandas apresentadas pelas áreas de negócio e propor alternativas de solução técnica e estratégia de desenvolvimento</option>
+              <option value="b">b) Elicitar requisitos e criar modelos de uso e de testes de sistemas</option>
+              <option value="c">c) Elaborar projeto lógico e físico de dados e de sistemas</option>
+              <option value="d">d) Definir a arquitetura de softwares e de sistemas</option>
+              <option value="e">e) Especificar unidades de implementação de software</option>
+              <option value="f">f) Elaborar documentação relativa às etapas de desenvolvimento de sistemas</option>
+              <option value="g">g) Planejar, elaborar e ministrar treinamentos relativos a sistemas de informação, ferramentas de acesso e manipulação de dados</option>
+              <option value="h">h) Selecionar, implementar e internalizar novas tecnologias de desenvolvimento</option>
+              <option value="i">i) Prestar assessoramento técnico no que se refere a prazos, recursos e alternativas de desenvolvimento de sistemas</option>
+              <option value="j">j) Especificar a manutenção de softwares e de sistemas </option>
+              <option value="l">l) Planejar e administrar componentes reusáveis e repositórios </option>
+              <option value="m">m) Certificar e inspecionar modelos e códigos de sistemas</option>
+              <option value="n">n) Elaborar e gerenciar projetos de sistemas e software</option>
+              <option value="o">o) Identificar e analisar as necessidades dos clientes em relação à informações visuais relacionadas à mídia digital e/ou impressa</option>
+              <option value="q">q) Elaborar e implementar projetos de programação visual relacionados à mídia digital e/ou impressa</option>
+              <option value="r">r) Elaborar e implementar leiaute para mídia digital e/ou impressa</option>
+              <option value="s">s) Efetuar manutenção relacionada aos elementos visuais em mídia digital e/ou impressa</option>
+              <option value="t">t) Efetuar prospecção, análise e implementação de soluções de usabilidade e acessibilidade</option>
+              <option value="u">u) Definir linguagens, materiais e processos de produção a serem utilizados em mídia digital e/ou impressa</option>
+              <option value="v">v) Elaborar especificações técnicas e documentações necessárias à execução das atividades de programação visual</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['descricao'].invalid && form['descricao'].touched || formDir.submitted)">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Descrição é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Abrangência -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="TB_ABRANGENCIA_id_abrangencia" class="required">Abrangência</label>
+            <select class="form-control" name="TB_ABRANGENCIA_id_abrangencia" id="TB_ABRANGENCIA_id_abrangencia" [ngClass]="{'is-invalid': (form.TB_ABRANGENCIA_id_abrangencia.invalid && form.TB_ABRANGENCIA_id_abrangencia.touched) || (form.TB_ABRANGENCIA_id_abrangencia.invalid && formDir.submitted), 'is-valid': form.TB_ABRANGENCIA_id_abrangencia.valid}">
+              <option *ngFor="let abrangencia of Abrangencia | filter: atributo.letra; let i = index" [selected]="abrangencia.id_abrangencia === atributo.TB_ABRANGENCIA_id_abrangencia"
+              value="{{abrangencia.id_abrangencia}}">{{abrangencia.classificacao + "-" + abrangencia.nome}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['TB_ABRANGENCIA_id_abrangencia'].invalid && form['TB_ABRANGENCIA_id_abrangencia'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Abrangência é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Complexidade -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="TB_COMPLEXIDADE_id_complexidade" class="required">Complexidade</label>
+            <select id="TB_COMPLEXIDADE_id_complexidade" class="form-control" formControlName="TB_COMPLEXIDADE_id_complexidade" [ngClass]="{'is-invalid': (form.TB_COMPLEXIDADE_id_complexidade.invalid && form.TB_COMPLEXIDADE_id_complexidade.touched) || (form.TB_COMPLEXIDADE_id_complexidade.invalid && formDir.submitted), 'is-valid': form.TB_COMPLEXIDADE_id_complexidade.valid}">
+              <option value="">Selecione</option>
+              <option *ngFor="let complexidade of Complexidade | filter: atributo.letra; let i = index" [selected]="complexidade.id_complexidade === atributo.TB_COMPLEXIDADE_id_complexidade"
+               value="{{complexidade.id_complexidade}}">{{complexidade.classificacao + "-" + complexidade.nome}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['TB_COMPLEXIDADE_id_complexidade'].invalid && form['TB_COMPLEXIDADE_id_complexidade'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Complexidade é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Impacto -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="TB_IMPACTO_id_impacto" class="required">Impacto</label>
+            <select id="TB_IMPACTO_id_impacto" class="form-control" formControlName="TB_IMPACTO_id_impacto" [ngClass]="{'is-invalid': (form.TB_IMPACTO_id_impacto.invalid && form.TB_IMPACTO_id_impacto.touched) || (form.TB_IMPACTO_id_impacto.invalid && formDir.submitted), 'is-valid': form.TB_IMPACTO_id_impacto.valid}">
+              <option value="">Selecione</option>
+								<option *ngFor="let impacto of Impacto | filter: atributo.letra; let i = index" [selected]="impacto.id_impacto === atributo.TB_IMPACTO_id_impacto"
+								 value="{{impacto.id_impacto}}">{{impacto.classificacao + "-" + impacto.nome}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['TB_IMPACTO_id_impacto'].invalid && form['TB_IMPACTO_id_impacto'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Impacto é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit">
+        Salvar
+      </button>
+      <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

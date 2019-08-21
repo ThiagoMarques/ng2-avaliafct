@@ -1,0 +1,122 @@
+<div class="card card-datatable">
+    <div class="card-body">
+      <div class="col-auto">
+        <div class="row justify-content-between">
+          <h1 class="heading h3 mb-3">Impactos Cadastrados</h1>
+          <a routerLink="/cadastro-base/impacto/create">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Novo
+          </a>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <form>
+          <ngx-datatable 
+          class="striped" 
+          [rows]="rows" 
+          [columnMode]="'flex'" 
+          [limit]="10"
+          [headerHeight]="40" 
+          [footerHeight]="100" 
+          [rowHeight]="'auto'"
+          [selected]="selected" 
+          [selectAllRowsOnPage]="false">
+            <ngx-datatable-column [flexGrow]="0" name="#" headerClass="text-center" cellClass="text-center" [width]="10">
+                <ng-template let-rowIndex="rowIndex+1" ngx-datatable-cell-template>
+                  <div class="d-flex flex-row justify-content-center">
+                    {{rowIndex}}
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="Atributo" prop='atributo'></ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="Tipo" prop="tipo"></ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="Classificação" headerClass="text-center" cellClass="text-center">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div class="d-flex flex-row justify-content-center">
+                      <span class="badge bg-green">{{ row.classificacao + "-" + row.nome }}</span>                
+                    </div>
+                  </ng-template>
+              </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="3" name="Descrição" prop="descricao"></ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="AÇÕES" headerClass="text-center" cellClass="text-center" [width]="30">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div class="d-flex flex-row justify-content-center">
+                  <button type="button" class="btn btn-circle-primary btn-sm" [routerLink]="['/cadastro-base/impacto/edit/', row.id_impacto]">
+                    <span class="sr-only">Editar</span>
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" class="btn btn-circle-danger btn-sm" (click)="onDeleteImpacto(row, template)">
+                    <span class="sr-only">Excluir</span>
+                    <i class="fa fa-times-circle-o" aria-hidden="true" alt="Remover registro"></i>
+                  </button>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="card">
+    <div class="card-body">
+      <div class="row justify-content-between">
+  
+        <div class="col-auto">
+          <h1 class="heading h3 mb-3">Impacto Cadastradas</h1>
+        </div>
+        <div class="col-auto">
+          <a routerLink="/cadastro-base/impacto/create">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Novo Cadastro
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead class="">
+                <tr>
+                  <th>#</th>
+                  <th>Atributo</th>
+                  <th>Tipo</th>
+                  <th>Classificação</th>
+                  <th>Descrição</th>
+                  <th class="text-center">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of impacto; let i = index;">
+                  <td>{{i+1}}</td>
+                  <td>{{  item.atributo }}</td>
+                  <td>{{  item.tipo }}</td>
+                  <td>{{  item.classificacao + "-" + item.nome }}</td>
+                  <td>{{  item.descricao }}</td>
+                  <td>
+                    <div class="d-flex flex-row justify-content-center">
+                      <button type="button" class="btn btn-circle-primary btn-sm" [routerLink]="['/cadastro-base/impacto/edit/', item.id_impacto]">
+                        <span class="sr-only">Editar</span>
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </button>
+                      <button type="button" class="btn btn-circle-danger btn-sm" (click)="onDeleteImpacto(item, template)">
+                        <span class="sr-only">Excluir</span>
+                        <i class="fa fa-times-circle-o" aria-hidden="true" alt="Remover registro"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+  <!-- Modal da exclusão -->
+  <ng-template #template>
+    <div class="modal-body text-center">
+      <p>Deseja realmente excluir o registro?</p>
+      <button type="button" class="btn btn-default" (click)="confirm()">Sim</button>
+      <button type="button" class="btn btn-primary" (click)="decline()">Não</button>
+    </div>
+  </ng-template>

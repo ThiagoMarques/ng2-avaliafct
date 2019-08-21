@@ -1,0 +1,61 @@
+<div class="card card-datatable">
+    <div class="card-body">
+      <div class="col-auto">
+        <div class="row justify-content-between">
+          <h1 class="heading h3 mb-3">Colaboradores Cadastrados</h1>
+          <a routerLink="/cadastro-base/colaborador/create">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Novo
+          </a>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <form>
+          <ngx-datatable 
+          class="striped" 
+          [rows]="rows" 
+          [columnMode]="'flex'" 
+          [limit]="10" 
+          [headerHeight]="40" 
+          [footerHeight]="100" 
+          [rowHeight]="'auto'"
+          [selected]="selected" 
+          [selectAllRowsOnPage]="false">
+            <ngx-datatable-column [flexGrow]="0" name="#" headerClass="text-center" cellClass="text-center" >
+                <ng-template let-rowIndex="rowIndex+1" ngx-datatable-cell-template>
+                  <div class="d-flex flex-row justify-content-center">
+                    {{rowIndex}}
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="Matricula" prop='matricula' ></ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="Nome" prop='nome'></ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="Telefone" prop='telefone'>
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                {{value | mask: '(000) 000-0000'}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="Especialidade" prop='especialidade'></ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="Salário" prop="salario"></ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="8,5% do Salário" prop="percentual_salario"></ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="Referência FCT" prop="referenciaFct"></ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="Divisão" prop="sigla"></ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1" name="AÇÕES" headerClass="text-center" cellClass="text-center" [width]="30">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div class="d-flex flex-row justify-content-center">
+                  <button type="button" class="btn btn-circle-primary btn-sm" [routerLink]="['/cadastro-base/colaborador/edit/', row.idColaborador]">
+                    <span class="sr-only">Editar</span>
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" class="btn btn-circle-danger btn-sm" (click)="onDeleteColaborador(row)">
+                    <span class="sr-only">Excluir</span>
+                    <i class="fa fa-times-circle-o" aria-hidden="true" alt="Remover registro"></i>
+                  </button>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </form>
+      </div>
+    </div>
+  </div>

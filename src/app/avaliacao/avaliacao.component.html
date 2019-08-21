@@ -1,0 +1,682 @@
+<form
+  [formGroup]="formAvaliacao"
+  #formDir="ngForm"
+  (ngSubmit)="registrarAvaliacao()"
+  novalidate
+>
+  <div class="row">
+    <div id="avaliacao" class="col-sm-9 col-xl-10">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="heading h3 mb-3">Avaliação</h1>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="divisao">Divisão</label>
+                <select
+                  name="divisao"
+                  id="divisao"
+                  class="form-control"
+                  formControlName="divisao"
+                  (change)="restoreColaborador()"
+                >
+                  <option value="" disabled selected>Selecione...</option>
+                  <option
+                    *ngFor="let divisoes of Divisao"
+                    [ngValue]="divisoes"
+                    >{{ divisoes.sigla }}</option
+                  >
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="colaborador">Colaborador</label>
+                <select
+                  name="colaborador"
+                  id="colaborador"
+                  class="form-control"
+                  formControlName="colaborador"
+                  (change)="somaValores('fctatual')"
+                >
+                  <option value="" disabled selected>Selecione...</option>
+                  <option
+                    *ngFor="let colaboradores of Colaborador"
+                    [ngValue]="colaboradores"
+                    >{{ colaboradores.nome }}</option
+                  >
+                </select>
+              </div>
+            </div>
+            <div id="papel" class="col-sm-6">
+              <div class="form-group">
+                <label for="papel">Papel</label>
+                <ng-select
+                  [items]="papel"
+                  [hideSelected]="true"
+                  formControlName="papel"
+                  [multiple]="true"
+                  allowClear="true"
+                  (change)="changePapel()"
+                  (remove)="getResetarAtributo(this)"
+                  bindValue="id_papel"
+                  [closeOnSelect]="false"
+                  [maxSelectedItems]="3"
+                  bindLabel="nome"
+                  placeholder="Selecione no máximo 3 itens"
+                >
+                </ng-select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label>Conhecimento em Tecnologias</label>
+                <ng-select
+                  [items]="tecnologia"
+                  [hideSelected]="true"
+                  formControlName="tecnologia"
+                  [multiple]="true"
+                  allowClear="true"
+                  (change)="getSomarTecnologia()"
+                  bindValue="id_tecnologia"
+                  [closeOnSelect]="false"
+                  [maxSelectedItems]="6"
+                  bindLabel="nome"
+                  placeholder="Selecione no máximo 6 itens"
+                >
+                </ng-select>
+              </div>
+            </div>
+          </div>
+          <!-- Atributos -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h1 class="h6 mb-6">
+                <div class="d-flex justify-content-between">
+                  <span>Atributos</span>
+                  <button
+                    id="button"
+                    type="button"
+                    class="btn btn-box-tool"
+                    (click)="hide_atributo()"
+                  >
+                    <i
+                      class="fa "
+                      [ngClass]="{
+                        'fa-minus': isOpen_atributo === true,
+                        'fa-plus': isOpen_atributo === false
+                      }"
+                    ></i>
+                  </button>
+                </div>
+              </h1>
+            </div>
+            <div class="table-responsive">
+              <table
+                class="table table-striped table-hover col-sm-12"
+                *ngIf="show_atributo"
+              >
+                <tbody class="active tab-pane">
+                  <tr>
+                    <th style="width:50%" class="col-sm-8">Descrição</th>
+                    <th>
+                      <span class="badge bg-yellow text-white"
+                        >Abrangência</span
+                      >
+                    </th>
+                    <th>
+                      <span class="badge bg-light-blue text-white"
+                        >Complexidade</span
+                      >
+                    </th>
+                    <th>
+                      <span class="badge bg-green text-white">Impacto</span>
+                    </th>
+                  </tr>
+                  <tr
+                    formArrayName="itemsAtributo"
+                    class="col-sm-4"
+                    *ngFor="
+                      let item of getItemsAtributo(formAvaliacao);
+                      let i = index
+                    "
+                  >
+                    <td [formGroupName]="i" class="description">
+                      <span>
+                        {{ item.value.letra }})&nbsp;{{
+                          item.value.descricao
+                        }}</span
+                      >
+                    </td>
+                    <td [formGroupName]="i" class="rating">
+                      <div class="radio" style="float: left;">
+                        <label class="align-self-center">
+                          <input
+                            class="align-self-center"
+                            type="radio"
+                            formControlName="Abrangencia"
+                            (change)="somaValores('atributo')"
+                            [value]="1"
+                            [checked]="true"
+                          />
+                          <span
+                            data-toggle="tooltip"
+                            title="{{ item.value.descricaoAbrangencia1 }}"
+                            class="badge bg-yellow text-white"
+                            >1-Moderado</span
+                          >
+                        </label>
+                        <br />
+                        <label>
+                          <input
+                            type="radio"
+                            formControlName="Abrangencia"
+                            (change)="somaValores('atributo')"
+                            [value]="2"
+                          />
+                          <span
+                            data-toggle="tooltip"
+                            title="{{ item.value.descricaoAbrangencia2 }}"
+                            class="badge bg-yellow text-white"
+                            >2-Significativa</span
+                          >
+                        </label>
+                        <br />
+                        <label>
+                          <input
+                            type="radio"
+                            formControlName="Abrangencia"
+                            (change)="somaValores('atributo')"
+                            [value]="3"
+                          />
+                          <span
+                            data-toggle="tooltip"
+                            title="{{ item.value.descricaoAbrangencia3 }}"
+                            class="badge bg-yellow text-white"
+                            >3-Muito</span
+                          >
+                        </label>
+                      </div>
+                    </td>
+                    <td [formGroupName]="i" class="rating">
+                      <div
+                        class="radio"
+                        style="float: left; position: relative;"
+                      >
+                        <label>
+                          <input
+                            type="radio"
+                            formControlName="Complexidade"
+                            (change)="somaValores('atributo')"
+                            [value]="1"
+                            [checked]="true"
+                          />
+                          <span
+                            data-toggle="tooltip"
+                            title="{{ item.value.descricaoComplexidade1 }}"
+                            class="badge bg-light-blue text-white"
+                            >1-Moderada</span
+                          >
+                        </label>
+                        <br />
+                        <label>
+                          <input
+                            type="radio"
+                            formControlName="Complexidade"
+                            (change)="somaValores('atributo')"
+                            [value]="2"
+                          />
+
+                          <span
+                            data-toggle="tooltip"
+                            title="{{ item.value.descricaoComplexidade2 }}"
+                            class="badge bg-light-blue text-white"
+                            >2-Alta</span
+                          >
+                        </label>
+                        <br />
+                        <label>
+                          <input
+                            type="radio"
+                            formControlName="Complexidade"
+                            (change)="somaValores('atributo')"
+                            [value]="3"
+                          />
+                          <span
+                            data-toggle="tooltip"
+                            title="{{ item.value.descricaoComplexidade3 }}"
+                            class="badge bg-light-blue text-white"
+                            >3-Altíssima</span
+                          >
+                        </label>
+                      </div>
+                    </td>
+                    <td [formGroupName]="i" class="rating">
+                      <div class="radio">
+                        <label>
+                          <input
+                            type="radio"
+                            formControlName="Impacto"
+                            (change)="somaValores('atributo')"
+                            [value]="1"
+                            [checked]="true"
+                          />
+                          <span
+                            data-toggle="tooltip"
+                            title="{{ item.value.descricaoImpacto1 }}"
+                            class="badge bg-green text-white"
+                            >1-Relevante</span
+                          >
+                        </label>
+                        <br />
+                        <label>
+                          <input
+                            type="radio"
+                            formControlName="Impacto"
+                            (change)="somaValores('atributo')"
+                            [value]="2"
+                          />
+                          <span
+                            data-toggle="tooltip"
+                            title="{{ item.value.descricaoImpacto2 }}"
+                            class="badge bg-green text-white"
+                            >2-Muito</span
+                          >
+                        </label>
+                        <br />
+                        <label>
+                          <input
+                            type="radio"
+                            formControlName="Impacto"
+                            (change)="somaValores('atributo')"
+                            [value]="3"
+                          />
+                          <span
+                            data-toggle="tooltip"
+                            title="{{ item.value.descricaoImpacto3 }}"
+                            class="badge bg-green text-white"
+                            >3-Altamente</span
+                          >
+                        </label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Projetos -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h1 class="h6 mb-6">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <span>Projetos (adicione no máximo 6)</span>
+                    <button
+                      type="button"
+                      id="button_project1"
+                      class="btn btn-secondary btn-sm"
+                      [disabled]="!enable_button"
+                      (click)="addProjeto()"
+                    >
+                      Adicionar
+                    </button>
+                    <button
+                      type="button"
+                      id="button_project2"
+                      class="btn btn-secondary btn-sm"
+                      (click)="openModal(msg)"
+                    >
+                      Remover Projetos
+                    </button>
+                    <ng-template #msg>
+                      <div class="modal-body text-center">
+                        <p>
+                          Tem certeza que deseja REMOVER todos os Projetos ?
+                        </p>
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          (click)="excluiTodosProjetos()"
+                        >
+                          Sim
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-default"
+                          (click)="decline()"
+                        >
+                          Não
+                        </button>
+                      </div>
+                    </ng-template>
+                  </div>
+                  <button
+                    id="button"
+                    type="button"
+                    class="btn btn-box-tool pull-right"
+                    (click)="hide_projeto()"
+                  >
+                    <i
+                      class="fa "
+                      [ngClass]="{
+                        'fa-minus': isOpen_projeto === true,
+                        'fa-plus': isOpen_projeto === false
+                      }"
+                    ></i>
+                  </button>
+                </div>
+              </h1>
+            </div>
+            <div class="col-sm-12">
+              <div class="table-responsive" *ngIf="show_projeto">
+                <table class="table">
+                  <tbody class="active tab-pane">
+                    <tr style="width: 100px">
+                      <th>#</th>
+                      <th>Código Serviço - Descrição</th>
+                      <th>
+                        <span class="badge bg-yellow text-white"
+                          >Abrangência</span
+                        >
+                      </th>
+                      <th>
+                        <span class="badge bg-light-blue text-white"
+                          >Complexidade</span
+                        >
+                      </th>
+                      <th>
+                        <span class="badge bg-green text-white">Impacto</span>
+                      </th>
+                      <th></th>
+                    </tr>
+                    <tr formArrayName="items" *ngFor="let item of getItems(formAvaliacao); let i = index" [attr.data-index]="i">
+                      <td>
+                        <label>{{ i + 1 }}</label>
+                      </td>
+                      <td [formGroupName]="i" class="rating">
+                        <div class="col-sm-12">
+                          <ng-select
+                            class="custom"
+                            [items]="projeto"
+                            bindLabel="titulo"
+                            bindValue="id_projeto"
+                            labelForId="Projeto"
+                            placeholder="Selecione..."
+                            formControlName="Projetos"
+                            [hideSelected]="true"
+                            
+                            [closeOnSelect]="true"
+                            dropdownPosition="auto">
+                          </ng-select>
+                          <!-- <select name="Projetos" class="form-control" formControlName="Projetos" id="Projetos">
+                           <option [selected]="true" value="">Selecione</option>
+                           <option *ngFor="let projetos of projeto" value="{{projetos.id_projeto}}">{{projetos.titulo}}</option>
+                         </select> -->
+                        </div>
+                      </td>
+                      <td [formGroupName]="i" class="rating">
+                        <div class="radio">
+                          <label style="width: 100px">
+                            <input
+                              type="radio"
+                              formControlName="Abrangencia"
+                              (change)="somaValores('projeto')"
+                              [value]="1"
+                            />
+                            <span class="badge bg-yellow text-white">1-Moderado</span>
+                          </label>
+                          <br />
+                          <label style="width: 100px">
+                            <input
+                              type="radio"
+                              formControlName="Abrangencia"
+                              (change)="somaValores('projeto')"
+                              [value]="2"
+                            />
+                            <span class="badge bg-yellow text-white"
+                              >2-Significativa</span
+                            >
+                          </label>
+                          <br />
+                          <label style="width: 100px">
+                            <input
+                              type="radio"
+                              formControlName="Abrangencia"
+                              (change)="somaValores('projeto')"
+                              [value]="3"
+                            />
+                            <span class="badge bg-yellow text-white"
+                              >3-Muito</span
+                            >
+                          </label>
+                        </div>
+                      </td>
+                      <td [formGroupName]="i" class="rating">
+                        <div class="radio">
+                          <label style="width: 100px">
+                            <input
+                              type="radio"
+                              formControlName="Complexidade"
+                              (change)="somaValores('projeto')"
+                              [value]="1"
+                            />
+                            <span class="badge bg-light-blue text-white"
+                              >1-Moderado</span
+                            >
+                          </label>
+                          <br />
+                          <label style="width: 100px">
+                            <input
+                              type="radio"
+                              formControlName="Complexidade"
+                              (change)="somaValores('projeto')"
+                              [value]="2"
+                            />
+                            <span class="badge bg-light-blue text-white"
+                              >2-Significativa</span
+                            >
+                          </label>
+                          <br />
+                          <label style="width: 100px">
+                            <input
+                              type="radio"
+                              formControlName="Complexidade"
+                              (change)="somaValores('projeto')"
+                              [value]="3"
+                            />
+                            <span class="badge bg-light-blue text-white"
+                              >3-Muito</span
+                            >
+                          </label>
+                        </div>
+                      </td>
+                      <td [formGroupName]="i" class="rating">
+                        <div class="radio">
+                          <label style="width: 100px">
+                            <input
+                              type="radio"
+                              formControlName="Impacto"
+                              (change)="somaValores('projeto')"
+                              [value]="1"
+                            />
+                            <span class="badge bg-green text-white"
+                              >1-Moderado</span
+                            >
+                          </label>
+                          <br />
+                          <label style="width: 100px">
+                            <input
+                              type="radio"
+                              formControlName="Impacto"
+                              (change)="somaValores('projeto')"
+                              [value]="2"
+                            />
+                            <span class="badge bg-green text-white"
+                              >2-Significativa</span
+                            >
+                          </label>
+                          <br />
+                          <label style="width: 100px">
+                            <input
+                              type="radio"
+                              formControlName="Impacto"
+                              (change)="somaValores('projeto')"
+                              [value]="3"
+                            />
+                            <span class="badge bg-green text-white"
+                              >3-Muito</span
+                            >
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <button
+                          (click)="openModal(msg)"
+                          type="button"
+                          class="btn btn-circle-info"
+                        >
+                          <i class="fa fa-times-circle-o"></i>
+                        </button>
+                        <ng-template #msg>
+                          <div class="modal-body text-center">
+                            <p>Tem certeza que deseja REMOVER o Projeto ?</p>
+                            <button
+                              type="button"
+                              class="btn btn-primary"
+                              (click)="excluiProjeto(i, item)"
+                            >
+                              Sim
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-default"
+                              (click)="decline()"
+                            >
+                              Não
+                            </button>
+                          </div>
+                        </ng-template>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Referência FCT Atual</label>
+                <input
+                  readonly
+                  type="text"
+                  class="form-control"
+                  formControlName="referenciaFctAtual"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Referência FCT pela Pontuação Total</label>
+                <input
+                  readonly
+                  type="text"
+                  class="form-control"
+                  formControlName="FCTPontuacaoTotal"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- </form> -->
+        </div>
+        <div class="card-footer">
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="!formAvaliacao.valid"
+          >
+            Salvar
+          </button>
+          <button
+            class="btn btn-secondary ml-3"
+            type="button"
+            (click)="onCancel()"
+          >
+            Limpar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="resultado" class="col-sm-3 col-xl-2">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="h6 mb-3">Resultado da Avaliação</h1>
+        </div>
+        <!-- Pontuação Total -->
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="vlrPtTotal">Pontuação Total</label>
+            <div class="col-sm-12 d-flex justify-content-center">
+              <input
+                id="vlrPtTotal"
+                type="text"
+                readonly
+                class="form-control"
+                formControlName="vlrPtTotal"
+              />
+            </div>
+          </div>
+          <!-- Pontuação FCT Atual -->
+          <div class="form-group">
+            <label for="vlrFCTatual">Pontuação FCT Atual</label>
+            <div class="col-sm-12 d-flex justify-content-center">
+              <input
+                id="vlrFCTatual"
+                type="text"
+                readonly
+                class="form-control"
+                formControlName="vlrFCTatual"
+              />
+            </div>
+          </div>
+          <!-- Ajuste -->
+          <div class="form-group">
+            <label for="ajuste">Ajuste</label>
+            <div class="col-sm-12 d-flex justify-content-center">
+              <input
+                id="ajuste"
+                type="text"
+                readonly
+                class="form-control"
+                formControlName="ajuste"
+              />
+            </div>
+          </div>
+
+          <!-- Barra de Progresso -->
+          <div class="form-group">
+            <span class="{{ classeCss1 }}"
+              >{{ this.percAjuste.toFixed(2) }}%</span
+            >
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <div class="mb-2 ">
+                <progressbar
+                  type="{{ statusBarra1 }}"
+                  [value]="percAjusteBarra"
+                  [striped]="true"
+                ></progressbar>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

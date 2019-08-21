@@ -1,0 +1,111 @@
+<div class="card">
+  <form [formGroup]="formDivisao" #formDir="ngForm" (ngSubmit)="editarCrud()" novalidate>
+    <div class="card-header">
+      <h1 class="heading h3 mb-3">Detalhes da Divisão </h1>
+    </div>
+    <div class="card-body">
+      <!-- Sigla -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="sigla" class="required">Sigla</label>
+            <select name="sigla" id="sigla" class="form-control" formControlName="sigla" [ngClass]="{'is-invalid': (form.sigla.invalid && form.sigla.touched) || (form.sigla.invalid && formDir.submitted), 'is-valid': form.sigla.valid}">
+              <option *ngFor="let divisoes of divisaoList" [selected]="divisao.sigla === divisoes.sigla">{{divisoes.sigla}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['sigla'].invalid && form['sigla'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Sigla é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Nome -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="nome" class="required">Nome</label>
+            <select name="nome" id="nome" class="form-control" formControlName="nome" [ngClass]="{'is-invalid': (form.nome.invalid && form.nome.touched) || (form.nome.invalid && formDir.submitted), 'is-valid': form.nome.valid}">
+              <option *ngFor="let divisoes of divisaoList" [selected]="divisao.nome === divisoes.nome">{{divisoes.nome}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['nome'].invalid && form['nome'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Nome é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- UF -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="uf" class="required">UF</label>
+            <select name="uf" id="uf" class="form-control" formControlName="uf" [ngClass]="{'is-invalid': (form.uf.invalid && form.uf.touched) || (form.uf.invalid && formDir.submitted), 'is-valid': form.uf.valid}">
+              <!-- <option *ngFor="let divisoes of divisaoList" [selected]="divisao.uf === divisoes.uf">{{divisoes.uf}}</option> -->
+              <option value="" [selected]="true">Selecione</option>
+              <option value="BH">BH</option>
+              <option value="DF">DF</option>
+              <option value="SD">SD</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['uf'].invalid && form['uf'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo UF é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Especialidade -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="especialidade" class="required">Especialidade</label>
+            <select name="especialidade" id="especialidade" class="form-control" formControlName="especialidade"
+              [ngClass]="{'is-invalid': (form.especialidade.invalid && form.especialidade.touched) || (form.especialidade.invalid && formDir.submitted), 'is-valid': form.especialidade.valid}">
+              <option *ngFor="let divisoes of divisaoList" [selected]="divisao.especialidade === divisoes.especialidade">{{divisoes.especialidade}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['especialidade'].invalid && form['especialidade'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Especialidade é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Descrição -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="descricao" class="required">Descrição</label>
+            <textarea class="form-control" placeholder="Descreva os detalhes da Divisão" formControlName="descricao"
+              name="descricao" id="descricao" cols="30" rows="5" [ngClass]="{'is-invalid': (form.descricao.invalid && form.descricao.touched) || (form.descricao.invalid && formDir.submitted), 'is-valid': form.descricao.valid}"></textarea>
+            <div class="invalid-feedback" *ngIf="(form['descricao'].invalid && form['descricao'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Descrição é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit">
+        Salvar
+      </button>
+      <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

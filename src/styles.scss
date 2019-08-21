@@ -1,0 +1,23 @@
+// Coloque aqui o estilo da sua aplicação!
+// Exemplo: sobreescreva variáveis, crie novas regras e etc.
+
+// Experimente descomentar as linhas abaixo para ver o resultado.
+// $primary: #fc0;
+// $sidebar-bg: darken($primary, 5);
+// $sidebar-dropdown-bg: darken($sidebar-bg, 5);
+
+// Impore o Serpro Design
+@import 'node_modules/@serpro-design/themes/scss/serpro-design/serpro-design.scss';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+// fix para alinhamento interno no conteúdo dos cards
+.card-header ~ .card-body {
+  padding: 1.25rem 3.75rem;
+}
+
+// fix para accordion
+.accordion-toggle {
+  
+  padding: 0;
+}

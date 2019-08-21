@@ -1,0 +1,19 @@
+<h1 class="heading h2">Perfil</h1>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="profileForm" (ngSubmit)="submit(profileModel)">
+          <formly-form class="row" [form]="profileForm" [model]="profileModel" [fields]="profileFields">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">
+                <span *ngIf="!localState.sending">Salvar</span>
+                <span *ngIf="localState.sending">Salvando</span>
+              </button>
+            </div>
+          </formly-form>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

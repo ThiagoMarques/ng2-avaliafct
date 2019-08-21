@@ -1,0 +1,135 @@
+<div class="card">
+  <form [formGroup]="formPesos" #formDir="ngForm" (ngSubmit)="editarCrud()" novalidate>
+    <div class="card-header">
+      <h1 class="heading h3 mb-3">Detalhes do Peso</h1>
+    </div>
+    <div class="card-body">
+      <!-- Tipo -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="tipo" class="required">Tipo</label>
+            <select id="tipo" class="form-control" formControlName="tipo" [ngClass]="{'is-invalid': (form.tipo.invalid && form.tipo.touched) || (form.tipo.invalid && formDir.submitted), 'is-valid': form.tipo.valid}">
+              <option [selected]="true" value="">Selecione</option>
+              <option value="Papel">Papel</option>
+              <option value="Projeto">Projeto</option>
+              <option value="Tecnologia">Tecnologia</option>
+              <!-- <option *ngFor="let item of pesosList" [selected]="item.tipo === pesos.tipo"
+              ngValue="{{item.tipo}}">{{item.tipo}}</option> -->
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['tipo'].invalid && form['tipo'].touched || formDir.submitted)">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Tipo é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Quantidade -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="quantidade" class="required">Quantidade</label>
+            <select id="quantidade" class="form-control" formControlName="quantidade" [ngClass]="{'is-invalid': (form.quantidade.invalid && form.quantidade.touched) || (form.quantidade.invalid && formDir.submitted), 'is-valid': form.quantidade.valid}">
+              <option value="" [selected]="true">Selecione...</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <!-- <option *ngFor="let item of pesosList" [selected]="item.quantidade === pesos.quantidade" ngValue="{{item.quantidade}}">{{item.quantidade}}</option> -->
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['quantidade'].invalid && form['quantidade'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Quantidade é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Valor -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="valor" class="required">Valor</label>
+            <select id="valor" class="form-control" formControlName="valor" [ngClass]="{'is-invalid': (form.valor.invalid && form.valor.touched) || (form.valor.invalid && formDir.submitted), 'is-valid': form.valor.valid}">
+              <option [selected]="true" value="0">Selecione</option>
+              <!-- <option *ngFor="let item of pesosList" [selected]="item.valor === pesos.valor" ngValue="{{item.valor}}">{{item.valor}}</option> -->
+              <option [selected]="true" value="0">Selecione</option>
+              <option value="1.100" [selected]="pesos.valor == 1.10">1.100</option>
+              <option value="1.125" [selected]="pesos.valor == 1.125">1.125</option>
+              <option value="1.150" [selected]="pesos.valor == 1.15">1.150</option>
+              <option value="1.175" [selected]="pesos.valor == 1.175">1.175</option>
+              <option value="1.200" [selected]="pesos.valor == 1.20">1.200</option>
+              <option value="1.225" [selected]="pesos.valor == 1.225">1.225</option>
+              <option value="1.250" [selected]="pesos.valor == 1.25">1.250</option>
+              <option value="1.275" [selected]="pesos.valor == 1.275">1.275</option>
+              <option value="1.300" [selected]="pesos.valor == 1.30">1.300</option>
+              <option value="1.325" [selected]="pesos.valor == 1.325">1.325</option>
+              <option value="1.350" [selected]="pesos.valor == 1.35">1.350</option>
+              <option value="1.375" [selected]="pesos.valor == 1.375">1.375</option>
+              <option value="1.400" [selected]="pesos.valor == 1.40">1.400</option>
+              <option value="1.425" [selected]="pesos.valor == 1.425">1.425</option>
+              <option value="1.450" [selected]="pesos.valor == 1.45">1.450</option>
+              <option value="1.475" [selected]="pesos.valor == 1.475">1.475</option>
+              <option value="1.500" [selected]="pesos.valor == 1.50">1.500</option>
+              <option value="1.525" [selected]="pesos.valor == 1.52">1.525</option>
+              <option value="1.550" [selected]="pesos.valor == 1.55">1.550</option>
+              <option value="1.575" [selected]="pesos.valor == 1.57">1.575</option>
+              <option value="1.600" [selected]="pesos.valor == 1.60">1.600</option>
+              <option value="1.625" [selected]="pesos.valor == 1.625">1.625</option>
+              <option value="1.650" [selected]="pesos.valor == 1.65">1.650</option>
+              <option value="1.675" [selected]="pesos.valor == 1.675">1.675</option>
+              <option value="1.700" [selected]="pesos.valor == 1.70">1.700</option>
+              <option value="1.725" [selected]="pesos.valor == 1.725">1.725</option>
+              <option value="1.750" [selected]="pesos.valor == 1.75">1.750</option>
+              <option value="1.775" [selected]="pesos.valor == 1.775">1.775</option>
+              <option value="1.800" [selected]="pesos.valor == 1.80">1.800</option>
+              <option value="1.825" [selected]="pesos.valor == 1.825">1.825</option>
+              <option value="1.850" [selected]="pesos.valor == 1.85">1.850</option>
+              <option value="1.875" [selected]="pesos.valor == 1.875">1.875</option>
+              <option value="1.900" [selected]="pesos.valor == 1.90">1.900</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="(form['valor'].invalid && form['valor'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Valor é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Descrição -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="descricao" class="required">Descrição</label>
+            <textarea class="form-control" placeholder="Descreva os detalhes do Peso" formControlName="descricao" name="descricao"
+              id="descricao" cols="30" rows="5" [ngClass]="{'is-invalid': (form.descricao.invalid && form.descricao.touched) || (form.descricao.invalid && formDir.submitted), 'is-valid': form.descricao.valid}"></textarea>
+            <div class="invalid-feedback" *ngIf="(form['descricao'].invalid && form['descricao'].touched) || formDir.submitted">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              O campo Descrição é obrigatório!
+            </div>
+            <div class="valid-feedback">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit">
+        Salvar
+      </button>
+      <button class="btn btn-secondary ml-3" type="reset" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
